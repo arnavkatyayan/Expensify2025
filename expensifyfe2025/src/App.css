@@ -41,3 +41,46 @@
   color: #888;
 }
 
+/* Expensify main CSS */
+
+.info-page-css {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 45vw;
+}
+.title {
+  position: absolute;
+  left:72px;
+  cursor: pointer;
+}
+.login-section {
+  height: 100%;
+ 
+}
+.login-form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 15vw;
+    left: 40px;
+    height:41vh;
+    width:30vw;
+    padding: 10px;
+    overflow: auto;
+}
+.text-field-css {
+  width:20vw !important;
+}
+.button-color {
+  background-color: #8B5CF6 !important;
+}
+.logo {
+  top: 12px;
+  left: 4px;
+}
+.signup-form {
+  height: 53vh;
+}
