@@ -64,7 +64,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 15vw;
+    top: 14vw;
     left: 40px;
     height:41vh;
     width:30vw;
@@ -83,4 +83,8 @@
 }
 .signup-form {
   height: 53vh;
+}
+.my-confirm-button {
+  background-color: #8B5CF6 !important;
+  width:12vw;
 }
