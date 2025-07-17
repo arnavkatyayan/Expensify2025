@@ -88,3 +88,26 @@
   background-color: #8B5CF6 !important;
   width:12vw;
 }
+.dashboard-section {
+  position: absolute;
+  top: 117px;
+  left: 0px;
+  background-color: white;
+  height: 100%;
+  width: 19vw;
+}
+.dashboard-options {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  top: 50px;
+  cursor: pointer;
+}
+.current-tab-bg-color {
+  background-color: #8B5CF6;
+  border-radius: 7px;
+  height: 40px;
+  padding-top: 7px;
+  color: white;
+}

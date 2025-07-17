@@ -37,4 +37,10 @@ public class LoginServicesImpl implements LoginServices {
 		
 	}
 
+	@Override
+	public String getUserFromMail(String email) {
+		UserEntity userVals = userRepo.findByEmail(email);
+		return userVals.getUsername();
+	}
+
 }

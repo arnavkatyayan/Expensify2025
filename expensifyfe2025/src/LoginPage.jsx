@@ -11,7 +11,7 @@ function LoginPage(props) {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSignup = () => {
+    const handleSignupMethod = () => {
         props.setIsSignupClicked(true);
         navigate("/signup");
     }
@@ -28,6 +28,17 @@ function LoginPage(props) {
     const handlePassword = (event) => {
         setPassword(event.target.value);
     }
+
+  const getUser = async (mail) => {
+  try {
+    const resp = await axios.get("http://localhost:9090/expensify-login-api/getUser", {
+      params: { mail: mail }
+    });
+    sessionStorage.setItem("user", JSON.stringify(resp.data));
+  } catch (error) {
+    console.log("error fetching the user", error);
+  }
+};
     const handleLogin = async () => {
         if (email.trim().length === 0 || password.trim().length === 0) {
             Swal.fire({
@@ -48,6 +59,9 @@ function LoginPage(props) {
         try {
             const resp = await axios.post("http://localhost:9090/expensify-login-api/login", loginRequestBody);
             if(resp.data === true) {
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("signedIn", "true");
+                await getUser(email);
              Swal.fire({
                     title: 'Success!',
                     text: 'Login Succesful!.',
@@ -56,7 +70,13 @@ function LoginPage(props) {
                     customClass: {
                         confirmButton: 'my-confirm-button'
                     }
-                });
+                }).then((result)=> {
+                if(result.isConfirmed) {
+                    navigate("/dashboard");
+                    handleReset();
+                   
+                }
+            });
             }
             else {
                   Swal.fire({
@@ -91,7 +111,7 @@ function LoginPage(props) {
                             Reset
                         </Button>
                        </div>
-                       <p className="mt-2" onClick={handleSignup}>Dont have an account? <span className="cursor-pointer font-medium hover:underline">SignUp</span></p>
+                       <p className="mt-2" onClick={handleSignupMethod}>Dont have an account? <span className="cursor-pointer font-medium hover:underline">SignUp</span></p>
                     </Form>
                 </div>
 

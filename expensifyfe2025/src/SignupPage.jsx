@@ -97,7 +97,7 @@ function SignupPage(props) {
                             Reset
                         </Button>
                        </div>
-                       <p className="mt-2" onClick={handleSwitch}>Already have an account? <span className="cursor-pointer font-medium hover:underline" onClick={handleSignup}>Login</span></p>
+                       <p className="mt-2" onClick={handleSwitch}>Already have an account? <span className="cursor-pointer font-medium hover:underline">Login</span></p>
                     </Form>
                 </div>
 
