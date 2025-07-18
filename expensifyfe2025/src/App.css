@@ -111,3 +111,19 @@
   padding-top: 7px;
   color: white;
 }
+.dashboardComp-section {
+  position: relative;
+  top: 11vh;
+  left:21vh;
+}
+.overview {
+  height: 16vh;
+  width: 29vw;
+}
+.dashboard-options p:hover {
+  background-color: #DDD6FE;
+  border-radius: 7px;
+  height: 40px;
+  color: white;
+  padding-top: 7px;
+}

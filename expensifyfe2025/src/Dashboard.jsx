@@ -6,10 +6,24 @@ function Dashboard (props) {
     const options = ["Dashboard","Income", "Expense","Logout"];
     const navigate = useNavigate();
     const changeTab = (option) => {
-        if(option === "Dashboard") {
-            navigate("/dashboard/dashboardChildComp");
-        }
         setCurrentTab(option);
+        switch(option) {
+            case "Dashboard":
+            navigate("/dashboard/dashboardChildComp");
+            break;
+            case "Income":
+            navigate("/dashboard/incomeChildComp");
+            break;
+            case "Expense":
+            navigate("/dashboard/expenseChildComp");
+            break; 
+            case "Logout":
+            navigate("/");
+            sessionStorage.setItem("signedIn", "false");
+            props.setIsSignedIn(false);
+            break;   
+        }
+        
     }
 
     return (

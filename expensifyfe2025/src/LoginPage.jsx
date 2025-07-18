@@ -61,6 +61,7 @@ function LoginPage(props) {
             if(resp.data === true) {
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("signedIn", "true");
+              //  props.setIsSignedIn(true);
                 await getUser(email);
              Swal.fire({
                     title: 'Success!',
@@ -72,7 +73,8 @@ function LoginPage(props) {
                     }
                 }).then((result)=> {
                 if(result.isConfirmed) {
-                    navigate("/dashboard");
+                    props.setIsSignedIn(true);
+                    navigate("/dashboard/dashboardChildComp");
                     handleReset();
                    
                 }
