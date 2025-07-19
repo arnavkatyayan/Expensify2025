@@ -1,10 +1,22 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 function Dashboard (props) {
     const [currentTab, setCurrentTab] = useState("Dashboard");
     const options = ["Dashboard","Income", "Expense","Logout"];
     const navigate = useNavigate();
+    const location = useLocation();
+
+     useEffect(() => {
+        if (location.pathname.includes("incomeChildComp")) {
+            setCurrentTab("Income");
+        } else if (location.pathname.includes("expenseChildComp")) {
+            setCurrentTab("Expense");
+        } else if (location.pathname.includes("dashboardChildComp")) {
+            setCurrentTab("Dashboard");
+        }
+    }, [location.pathname]);
+    
     const changeTab = (option) => {
         setCurrentTab(option);
         switch(option) {

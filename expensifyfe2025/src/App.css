@@ -127,3 +127,35 @@
   color: white;
   padding-top: 7px;
 }
+.income-bar-chart {
+  position: absolute;
+  left: 22vw;
+  width: 61vw;
+  top: 7vw;
+}
+.income-btn-alignment {
+  position: absolute;
+  right: 22px;
+  top: 37px;
+  background-color: #DDD6FE !important;
+  border: none !important;
+  color:#8B5CF6 !important;
+  font-weight: 600 !important;
+}
+.income-btn-alignment:hover {
+  position: absolute;
+  right: 22px;
+  top: 37px;
+  background-color:#8B5CF6!important;
+  border: none !important;
+  color:white!important;
+  font-weight: 600 !important;
+}
+.income-source Button {
+  background-color:#8B5CF6!important;
+  border: none !important;
+}
+.emoji-option:hover {
+  background-color:#8B5CF6!important;
+  border: none !important;
+}
