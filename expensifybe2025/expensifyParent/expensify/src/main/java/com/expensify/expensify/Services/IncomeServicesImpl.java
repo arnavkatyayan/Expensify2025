@@ -1,8 +1,14 @@
 package com.expensify.expensify.Services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.expensify.expensify.DTO.IncomeDTO;
 import com.expensify.expensify.Entities.IncomeEntities;
 import com.expensify.expensify.Repositories.IncomeRepository;
 import com.expensify.expensify.Requests.IncomeRequest;
@@ -24,6 +30,33 @@ public class IncomeServicesImpl implements IncomeServices {
 		incomeEntity.setUserName(incomeRequest.getUserName());
 		incomeRepo.save(incomeEntity);
 		
+	}
+
+	@Override
+	public Map<String, Integer> fetchIncomeDetailsService(String userName) {
+	    Map<String, Integer> map = new HashMap<>();
+	    List<IncomeEntities> incomes = incomeRepo.findAllByUserName(userName);
+	    for (IncomeEntities income : incomes) {
+	        System.out.println("Date: " + income.getDate() + ", Amount: " + income.getAmount());
+	        map.put(income.getDate(), income.getAmount());
+	    }
+	    return map;
+	}
+
+	@Override
+	public List<IncomeDTO> fetchAllIncomeDetailsService(String userName) {
+		List<IncomeDTO> incomeDetails = new ArrayList<>();
+		List<IncomeEntities> incomes = incomeRepo.findAllByUserName(userName);
+		for(IncomeEntities income:incomes) {
+			IncomeDTO dto = new IncomeDTO();
+			dto.setAmount(income.getAmount());
+			dto.setDate(income.getDate());
+			dto.setSource(income.getSource());
+			dto.setEmoji(income.getEmoji());
+			dto.setUserName(userName);
+			incomeDetails.add(dto);
+		}
+		return incomeDetails;
 	}
 
 }

@@ -34,7 +34,7 @@ function LoginPage(props) {
     const resp = await axios.get("http://localhost:9090/expensify-login-api/getUser", {
       params: { mail: mail }
     });
-    sessionStorage.setItem("user", JSON.stringify(resp.data));
+    sessionStorage.setItem("user", resp.data);
   } catch (error) {
     console.log("error fetching the user", error);
   }

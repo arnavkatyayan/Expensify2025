@@ -18,9 +18,13 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(() => {
   return sessionStorage.getItem("signedIn") === "true";
 });
-  const [user, setUser] = useState(()=> {
-    return sessionStorage.getItem("user") || "";
-  })
+  // const [user, setUser] = useState(()=> {
+  //   return sessionStorage.getItem("user") || "";
+  // })
+  const [user, setUser] = useState(() => {
+  const raw = sessionStorage.getItem("user") || "";
+  return raw.replace(/^"|"$/g, '').trim();
+});
 
   useEffect(() => {
   //setEmail(sessionStorage.getItem("email") || "");
@@ -55,7 +59,7 @@ function App() {
         <>
         <Route path="/dashboard" element={<Dashboard email={email} user={user} setIsSignedIn={setIsSignedIn}/>} />
         <Route path="/dashboard/dashboardChildComp" element={<DashboardChildComp/>} /> 
-        <Route path="/dashboard/incomeChildComp" element={<IncomeChildComp/>} /> 
+        <Route path="/dashboard/incomeChildComp" element={<IncomeChildComp user={user}/>} /> 
         <Route path="/dashboard/expenseChildComp" element={<ExpenseChildComp/>} /> 
         </>
         :null }

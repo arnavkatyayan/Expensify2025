@@ -41,7 +41,7 @@ function Dashboard (props) {
     return (
         <div className="dashboard-section border border-amber-100 shadow-2xl rounded-tr-2xl p-3.5">
             <div className="flex flex-col">
-                <h5>Hi, {props.user}</h5>
+                <h5>Hi, <span className="font-black">{props.user}</span></h5>
                 <div className="dashboard-options">
                     {
                         options.map((option) =>

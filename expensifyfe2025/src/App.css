@@ -159,3 +159,26 @@
   background-color:#8B5CF6!important;
   border: none !important;
 }
+.income-grid {
+  height: 40vh;
+  width: 61vw;
+  position: absolute;
+  top: 67vh;
+  left: 22vw;
+  overflow: auto;
+}
+.emoji-section {
+  height: 3vh;
+  width: 2vw;
+  padding: 2px;
+}
+.income-div-alignment {
+  position: relative;
+  left: 4px;
+  top: 25px;
+}
+.income-expense {
+  height:3vh;
+  width:4vw;
+  color:green
+}
