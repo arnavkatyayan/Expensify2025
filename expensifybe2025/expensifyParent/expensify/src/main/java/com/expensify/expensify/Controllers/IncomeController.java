@@ -32,13 +32,13 @@ public class IncomeController {
 	public ResponseEntity<?> saveIncomeDetails(@RequestBody IncomeRequest incomeRequest) {
 		try {
 			incomeServices.saveIncomeDetails(incomeRequest);
-			return ResponseEntity.ok("Income details successfully");
+			return ResponseEntity.ok("Income details saved successfully");
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 			  return ResponseEntity
 		                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                .body("Signup failed: " + e.getMessage());
+		                .body("Add income details failed: " + e.getMessage());
 		}
 	}
 	

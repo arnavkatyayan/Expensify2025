@@ -182,3 +182,10 @@
   width:4vw;
   color:green
 }
+.income-line-chart {
+  position: absolute;
+  left: 22vw;
+  width: 61vw;
+  top: 7vw;
+  height:46vh;
+}

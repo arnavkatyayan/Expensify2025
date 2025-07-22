@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
   //setEmail(sessionStorage.getItem("email") || "");
   setIsSignedIn(sessionStorage.getItem("signedIn") === "true");
-  //setUser(sessionStorage.getItem("user") || "");
+  setUser(sessionStorage.getItem("user") || "");
 }, [isSignedIn]);
   return (
     <div>
@@ -60,7 +60,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard email={email} user={user} setIsSignedIn={setIsSignedIn}/>} />
         <Route path="/dashboard/dashboardChildComp" element={<DashboardChildComp/>} /> 
         <Route path="/dashboard/incomeChildComp" element={<IncomeChildComp user={user}/>} /> 
-        <Route path="/dashboard/expenseChildComp" element={<ExpenseChildComp/>} /> 
+        <Route path="/dashboard/expenseChildComp" element={<ExpenseChildComp user={user}/>} /> 
         </>
         :null }
       </Routes>

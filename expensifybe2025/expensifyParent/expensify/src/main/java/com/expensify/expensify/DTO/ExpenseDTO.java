@@ -1,0 +1,63 @@
+package com.expensify.expensify.DTO;
+
+public class ExpenseDTO {
+	 private String source;
+	    private int amount;
+	    private String emoji;
+	    private String date;
+	    private String userName;
+
+	    // ✅ Default constructor (required for frameworks like Jackson, JPA, etc.)
+	    public ExpenseDTO() {
+	    }
+
+	    // ✅ Parameterized constructor (handy when creating objects manually)
+	    public ExpenseDTO(String source, int amount, String emoji, String date, String userName) {
+	        this.source = source;
+	        this.amount = amount;
+	        this.emoji = emoji;
+	        this.date = date;
+	        this.userName = userName;
+	    }
+
+	    // ✅ Getters and Setters
+	    public String getSource() {
+	        return source;
+	    }
+
+	    public void setSource(String source) {
+	        this.source = source;
+	    }
+
+	    public int getAmount() {
+	        return amount;
+	    }
+
+	    public void setAmount(int amount) {
+	        this.amount = amount;
+	    }
+
+	    public String getEmoji() {
+	        return emoji;
+	    }
+
+	    public void setEmoji(String emoji) {
+	        this.emoji = emoji;
+	    }
+
+	    public String getDate() {
+	        return date;
+	    }
+
+	    public void setDate(String date) {
+	        this.date = date;
+	    }
+
+	    public String getUserName() {
+	        return userName;
+	    }
+
+	    public void setUserName(String userName) {
+	        this.userName = userName;
+	    }
+}
