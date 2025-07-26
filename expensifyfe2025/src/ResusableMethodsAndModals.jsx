@@ -2,6 +2,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Modal, Form, Button } from 'react-bootstrap';
 import EmojiPicker from 'emoji-picker-react';
+import { PieChart, Pie, Cell, Legend } from 'recharts';
 import {
   LineChart,
   Line,
@@ -232,6 +233,35 @@ export const IncomeBarChart = ({incomeData}) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+
+const COLORS = ['#F97316', '#EF4444', '#6366F1']; // Orange, Red, Indigo
+export const PieChartData = ({ balance, incomeAmount, expenseAmount}) => {
+    const pieChartData = [
+    { name: 'Total Income', value: incomeAmount },
+    { name: 'Total Expenses', value: expenseAmount },
+    { name: 'Total Balance', value: balance },
+];
+    return (
+        <PieChart width={400} height={300}>
+            <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={70}
+                outerRadius={100}
+                paddingAngle={5}
+                dataKey="value"
+            >
+                {pieChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+        </PieChart>
+    )
 };
 
 

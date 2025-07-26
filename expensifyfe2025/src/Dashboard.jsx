@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 function Dashboard (props) {
     const [currentTab, setCurrentTab] = useState("Dashboard");
-    const options = ["Dashboard","Income", "Expense","Logout"];
+  const options = [
+  "🧭 Dashboard",
+  "💰 View Income Sources",
+  "💸 View Expense Sources",
+  "🔒 Change Password",
+  "🚪 Logout"
+];
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -20,16 +27,16 @@ function Dashboard (props) {
     const changeTab = (option) => {
         setCurrentTab(option);
         switch(option) {
-            case "Dashboard":
+            case "🧭 Dashboard":
             navigate("/dashboard/dashboardChildComp");
             break;
-            case "Income":
+            case "💰 View Income Sources":
             navigate("/dashboard/incomeChildComp");
             break;
-            case "Expense":
+            case "💸 View Expense Sources":
             navigate("/dashboard/expenseChildComp");
             break; 
-            case "Logout":
+            case "🚪 Logout":
             navigate("/");
             sessionStorage.setItem("signedIn", "false");
             props.setIsSignedIn(false);

@@ -1,0 +1,2 @@
+ALTER TABLE expensifyschema.users
+ADD COLUMN balance NUMERIC NOT NULL DEFAULT 0;

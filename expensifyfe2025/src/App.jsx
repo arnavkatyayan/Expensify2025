@@ -58,7 +58,7 @@ function App() {
         {isSignedIn ? 
         <>
         <Route path="/dashboard" element={<Dashboard email={email} user={user} setIsSignedIn={setIsSignedIn}/>} />
-        <Route path="/dashboard/dashboardChildComp" element={<DashboardChildComp/>} /> 
+        <Route path="/dashboard/dashboardChildComp" element={<DashboardChildComp user={user}/>} /> 
         <Route path="/dashboard/incomeChildComp" element={<IncomeChildComp user={user}/>} /> 
         <Route path="/dashboard/expenseChildComp" element={<ExpenseChildComp user={user}/>} /> 
         </>

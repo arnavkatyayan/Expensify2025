@@ -23,6 +23,9 @@ public class UserEntity {
 	
 	@Column(name="email")
 	private String email;
+	
+	@Column(name="balance")
+	private int Balance;
 
 	public Long getId() {
 		return id;
@@ -55,6 +58,15 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public int getBalance() {
+		return Balance;
+	}
+
+	public void setBalance(int balance) {
+		Balance = balance;
+	}
+	
 	
 	
 }

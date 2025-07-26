@@ -25,7 +25,6 @@ function IncomeChildComp(props) {
     const getIncomeDetails = async () => {
         try {
             const resp = await axios.get("http://localhost:9090/expensify-income-api/fetchIncomeDetails", { params: { userName: cleanedUsername } });
-            console.log(resp.data);
             const result = Object.entries(resp.data).map(([date, amount]) => ({
                 Date: date,
                 Amount: amount
@@ -73,7 +72,6 @@ function IncomeChildComp(props) {
     const getIncomeDetailsAllInfo = async () => {
         try {
             const resp = await axios.get("http://localhost:9090/expensify-income-api/fetchAllIncomeDetails",{params:{userName:props.user}});
-            console.log(resp.data);
             setIncomeDataAll(resp.data);
         } catch(error) {
             console.log("error fetching the details",error);
