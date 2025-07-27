@@ -165,7 +165,7 @@
   border: none !important;
 }
 .income-grid {
-  height: 40vh;
+  height: 70vh;
   width: 61vw;
   position: absolute;
   top: 67vh;
@@ -228,6 +228,7 @@
 .expense-dashboard-section {
   height: 38vh;
   width: 28vw;
+  overflow: auto;
 }
 .source-css {
   white-space: nowrap;
