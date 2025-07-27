@@ -264,4 +264,54 @@ export const PieChartData = ({ balance, incomeAmount, expenseAmount}) => {
     )
 };
 
+export const ChangePassword = ({show,title,onClose,currentPassword, newPassword, setCurrentPassword, setNewPassword, handlePasswordChange, handleResetPasswords}) => {
+    return (
+        <Modal show={show} onHide={onClose} centered>
+         <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <ul className='list-items'>
+                    <li>1) To update your password, please enter your current one and choose a new one you'd like to set.</li>
+                    <li>2) Make sure the new password is different from your current one.</li>
+                    <li>3) For your security, use a strong password with a mix of letters, numbers, and symbols.</li>
+                </ul>
+              <Form>
+                    <Form.Group className="mb-3" controlId="incomeSource">
+                        <Form.Label>Current password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter your current password"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="incomeAmount">
+                        <Form.Label>New password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter your new password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+                <div className='flex justify-items-start gap-2.5 income-source'>
+                        <Button variant="primary" type="submit" className="w-40" onClick={handlePasswordChange}>
+                            Change
+                        </Button>
+                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetPasswords()}>
+                            Reset
+                        </Button>
+                    </div>
+            
+            
+            </Form> 
+            </Modal.Body>
+            </Modal>
+      
+    )
+}
 

@@ -2,6 +2,7 @@ package com.expensify.expensify.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.expensify.expensify.Entities.UserEntity;
 import com.expensify.expensify.Repositories.UserRepository;
@@ -41,6 +42,26 @@ public class LoginServicesImpl implements LoginServices {
 	public String getUserFromMail(String email) {
 		UserEntity userVals = userRepo.findByEmail(email);
 		return userVals.getUsername();
+	}
+
+	@Override
+	public Boolean checkCurrentPassword(String userName, String password) {
+		UserEntity val = userRepo.findByUsername(userName);
+		if(val.getPassword().equals(password)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	@Transactional
+	public void changePasswordService(String userName, String currentPassword, String newPassword) {
+		UserEntity val = userRepo.findByUsername(userName);
+		val.setPassword(newPassword);
+		userRepo.save(val);
+		
 	}
 
 }

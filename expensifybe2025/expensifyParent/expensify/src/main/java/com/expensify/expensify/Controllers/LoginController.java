@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.expensify.expensify.Requests.ChangePassword;
 import com.expensify.expensify.Requests.LoginRequest;
 import com.expensify.expensify.Requests.SignupRequest;
 import com.expensify.expensify.Services.LoginServices;
@@ -54,6 +55,28 @@ public class LoginController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("No user found");
+		}
+	}
+	
+	@GetMapping("/checkCurrentPassword")
+	public ResponseEntity<Boolean> checkCurrentPassword(@RequestParam String password , @RequestParam String userName) {
+		try {
+			Boolean isPasswordCorrect = loginService.checkCurrentPassword(userName, password);
+			return ResponseEntity.ok(isPasswordCorrect);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+		}
+	}
+	
+	@PostMapping("/changePasswords")
+	public ResponseEntity<?> changePassword(@RequestBody ChangePassword changePassword) {
+		try {
+			loginService.changePasswordService(changePassword.getUserName(),changePassword.getCurrentPassword(), changePassword.getNewPassword());
+			return ResponseEntity.ok("Password Changed Successfully");
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Password change failed: " +e.getMessage());
 		}
 	}
 }

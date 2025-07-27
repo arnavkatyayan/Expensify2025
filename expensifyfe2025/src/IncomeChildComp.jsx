@@ -110,6 +110,7 @@ function IncomeChildComp(props) {
                     handleResetIncomeValues();
                     handleClose();
                     getIncomeDetails();
+                    getIncomeDetailsAllInfo();
                 }
             });
         } catch (error) {
