@@ -14,4 +14,5 @@ public interface IncomeServices {
 	void saveIncomeDetails(@RequestBody IncomeRequest incomeRequest);
 	Map<String, Integer> fetchIncomeDetailsService(String userName);
 	List<IncomeDTO> fetchAllIncomeDetailsService(String userName);
+	void deleteEntryService(Long id);
 }

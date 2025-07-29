@@ -54,9 +54,16 @@ public class IncomeServicesImpl implements IncomeServices {
 			dto.setSource(income.getSource());
 			dto.setEmoji(income.getEmoji());
 			dto.setUserName(userName);
+			dto.setId(income.getId());
 			incomeDetails.add(dto);
 		}
 		return incomeDetails;
+	}
+
+	@Override
+	public void deleteEntryService(Long id) {
+		
+		incomeRepo.deleteById(id);
 	}
 
 }

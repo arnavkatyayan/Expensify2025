@@ -12,4 +12,5 @@ import com.expensify.expensify.Requests.ExpenseRequest;
 public interface ExpenseServices {
 	void saveExpenseDetails(@RequestBody ExpenseRequest expenseRequest);
 	List<ExpenseDTO> getExpenseDetailsService(String userName);
+	void deleteEntryService(Long id);
 }

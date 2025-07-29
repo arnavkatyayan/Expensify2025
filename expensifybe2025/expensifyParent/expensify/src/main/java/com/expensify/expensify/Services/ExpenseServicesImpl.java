@@ -38,9 +38,15 @@ public class ExpenseServicesImpl implements ExpenseServices{
 			dto.setDate(entity.getDate());
 			dto.setSource(entity.getSource());
 			dto.setUserName(entity.getUserName());
+			dto.setId(entity.getId());
 			list.add(dto);
 		}
 		return list;
+	}
+	@Override
+	public void deleteEntryService(Long id) {
+		expenseRepo.deleteById(id);
+		
 	}
 
 }

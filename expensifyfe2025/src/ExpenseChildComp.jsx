@@ -4,7 +4,8 @@ import { Button } from "react-bootstrap";
 import { ExpenseChart, AddExpense } from "./ResusableMethodsAndModals";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import Delete from'/DeleteImage.png';
+import { deleteEntry } from "./ResusableMethodsAndModals";
 
 function ExpenseChildComp(props) {
     const [isAddExpenseClicked, setIsAddExpenseClicked] = useState(false);
@@ -136,6 +137,7 @@ function ExpenseChildComp(props) {
                         <div className="bg-red-300 !text-red-600 income-expense rounded-md">
                             - Rs:{item.amount}
                         </div>
+                         <img src={Delete} className="h-7 cursor-pointer" onClick={()=>deleteEntry("expense", item.id, getExpenseDetails)}/>
                         </div>
                     ))
                    } 

@@ -4,7 +4,8 @@ import { Button } from "react-bootstrap";
 import {useState, useEffect} from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-
+import Delete from'/DeleteImage.png';
+import { deleteEntry } from "./ResusableMethodsAndModals";
 function IncomeChildComp(props) {
     const [isAddIncomeClicked, setIsAddIncomeClicked] = useState(false);
     const [source, setSource] = useState("");
@@ -164,8 +165,8 @@ function IncomeChildComp(props) {
                 </Button>
                 <div className="grid grid-cols-3 gap-3">
                    {
-                    incomeDataAll.map((item)=> (
-                       <div className="flex income-div-alignment gap-6 justify-center items-center hover:rounded-xl hover:bg-gray-100 pt-1.5 cursor-pointer">
+                    incomeDataAll.map((item,index)=> (
+                       <div className="flex income-div-alignment gap-6 justify-center items-center hover:rounded-xl hover:bg-gray-100 pt-1.5 cursor-pointer" key={item.id}>
 
                         <div className="emoji-section rounded-full bg-gray-300">
                             {item.emoji}
@@ -177,6 +178,7 @@ function IncomeChildComp(props) {
                         <div className="bg-green-200 income-expense rounded-md">
                             + Rs:{item.amount}
                         </div>
+                        <img src={Delete} className="h-7 cursor-pointer" onClick={()=>deleteEntry("income", item.id, getIncomeDetailsAllInfo,getIncomeDetails)}/>
                         </div>
                     ))
                    } 

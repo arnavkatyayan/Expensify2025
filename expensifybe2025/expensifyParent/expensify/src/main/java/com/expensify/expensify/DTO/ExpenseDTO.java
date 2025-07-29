@@ -6,18 +6,19 @@ public class ExpenseDTO {
 	    private String emoji;
 	    private String date;
 	    private String userName;
-
+	    private Long Id;
 	    // ✅ Default constructor (required for frameworks like Jackson, JPA, etc.)
 	    public ExpenseDTO() {
 	    }
 
 	    // ✅ Parameterized constructor (handy when creating objects manually)
-	    public ExpenseDTO(String source, int amount, String emoji, String date, String userName) {
+	    public ExpenseDTO(String source, int amount, String emoji, String date, String userName,Long Id) {
 	        this.source = source;
 	        this.amount = amount;
 	        this.emoji = emoji;
 	        this.date = date;
 	        this.userName = userName;
+	        this.Id = Id;
 	    }
 
 	    // ✅ Getters and Setters
@@ -60,4 +61,14 @@ public class ExpenseDTO {
 	    public void setUserName(String userName) {
 	        this.userName = userName;
 	    }
+
+		public Long getId() {
+			return Id;
+		}
+
+		public void setId(Long id) {
+			Id = id;
+		}
+	    
+	    
 }

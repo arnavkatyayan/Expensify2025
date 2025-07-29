@@ -3,6 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { Modal, Form, Button } from 'react-bootstrap';
 import EmojiPicker from 'emoji-picker-react';
 import { PieChart, Pie, Cell, Legend } from 'recharts';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import {
   LineChart,
   Line,
@@ -313,5 +315,59 @@ export const ChangePassword = ({show,title,onClose,currentPassword, newPassword,
             </Modal>
       
     )
+}
+
+export const deleteEntry = async (type,index,getIncomeDetailsAllInfo,getIncomeDetails,getExpenseDetails) => {
+    if(type === "income") {
+        await deleteIncomeEntry(index,getIncomeDetailsAllInfo,getIncomeDetails);
+    }
+    else {
+       await deleteExpenseEntry(index,getIncomeDetailsAllInfo);
+    }
+}
+
+const deleteIncomeEntry = async (id, getIncomeDetailsAllInfo,getIncomeDetails) => {
+    try {
+        await axios.delete("http://localhost:9090/expensify-income-api/deleteEntry", { params: { id: id } });
+        Swal.fire({
+            title: 'Success!',
+            text: 'Entry Deleted!.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass: {
+                confirmButton: 'my-confirm-button'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                getIncomeDetailsAllInfo();
+                getIncomeDetails();
+            }
+        })
+    }
+    catch (error) {
+        console.log("Error deleting income", error);
+    }
+}
+
+const deleteExpenseEntry = async (id,getExpenseDetails) => {
+    try {
+        await axios.delete("http://localhost:9090/expensify-expense-api/deleteEntry", { params: { id: id } });
+        Swal.fire({
+            title: 'Success!',
+            text: 'Entry Deleted!.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass: {
+                confirmButton: 'my-confirm-button'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+               getExpenseDetails();
+            }
+        })
+    }
+    catch (error) {
+        console.log("Error deleting expense", error);
+    }
 }
 
