@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 function Dashboard (props) {
-    const [currentTab, setCurrentTab] = useState("Dashboard");
+    const [currentTab, setCurrentTab] = useState("🧭 Dashboard");
     const [openChangePassWindow, setOpenChangePassWindow] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -21,15 +21,15 @@ function Dashboard (props) {
     const navigate = useNavigate();
     const location = useLocation();
 
-     useEffect(() => {
-        if (location.pathname.includes("incomeChildComp")) {
-            setCurrentTab("Income");
-        } else if (location.pathname.includes("expenseChildComp")) {
-            setCurrentTab("Expense");
-        } else if (location.pathname.includes("dashboardChildComp")) {
-            setCurrentTab("Dashboard");
-        }
-    }, [location.pathname]);
+    useEffect(() => {
+    if (location.pathname.includes("incomeChildComp")) {
+        setCurrentTab("💰 View Income Sources");
+    } else if (location.pathname.includes("expenseChildComp")) {
+        setCurrentTab("💸 View Expense Sources");
+    } else if (location.pathname.includes("dashboardChildComp")) {
+        setCurrentTab("🧭 Dashboard");
+    }
+}, [location.pathname]);
 
     const handleClose = () => {
         setOpenChangePassWindow(false);
