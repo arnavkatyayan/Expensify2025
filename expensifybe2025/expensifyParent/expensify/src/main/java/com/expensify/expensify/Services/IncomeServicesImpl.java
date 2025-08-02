@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.expensify.expensify.DTO.IncomeDTO;
 import com.expensify.expensify.Entities.IncomeEntities;
 import com.expensify.expensify.Repositories.IncomeRepository;
+import com.expensify.expensify.Requests.EditIncomeRequest;
 import com.expensify.expensify.Requests.IncomeRequest;
 
 @Service
@@ -64,6 +65,23 @@ public class IncomeServicesImpl implements IncomeServices {
 	public void deleteEntryService(Long id) {
 		
 		incomeRepo.deleteById(id);
+	}
+
+	@Override
+	public void editEntryService(EditIncomeRequest editIncomeRequest) {
+		IncomeEntities entity = incomeRepo.findByUserNameAndId(editIncomeRequest.getUserName(),
+				editIncomeRequest.getId());
+		if (entity != null) {
+			// Update fields with new values
+			entity.setDate(editIncomeRequest.getDate());
+			entity.setAmount(editIncomeRequest.getAmount());
+			entity.setSource(editIncomeRequest.getSource());
+			entity.setEmoji(editIncomeRequest.getEmoji());
+
+			// Save updated entity
+			incomeRepo.save(entity);
+		}
+
 	}
 
 }

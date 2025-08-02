@@ -5,7 +5,8 @@ import {useState, useEffect} from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Delete from'/DeleteImage.png';
-import { deleteEntry } from "./ResusableMethodsAndModals";
+import Edit from'/Edit.png';
+import { deleteEntry, EditSection } from "./ResusableMethodsAndModals";
 function IncomeChildComp(props) {
     const [isAddIncomeClicked, setIsAddIncomeClicked] = useState(false);
     const [source, setSource] = useState("");
@@ -16,7 +17,9 @@ function IncomeChildComp(props) {
     const [incomeData, setIncomeData] = useState([]);
     const cleanedUsername = props.user.trim().replace(/[^\w]/g, '');
     const [incomeDataAll, setIncomeDataAll] = useState([]);
-
+    const [editableObj, setEditableObj] = useState([]);
+    const [isEditIncomeClicked, setIsEditIncomeClicked] = useState(false);
+    const [editableId, setEditableId] = useState(-1);
     useEffect(()=> {
         getIncomeDetails(); 
         getIncomeDetailsAllInfo();
@@ -124,11 +127,60 @@ function IncomeChildComp(props) {
         setAmount("");
         setEmoji("");
         setDate("");
+        setEditableId(-1);
     }
 
     const handleClose = () => {
         setIsAddIncomeClicked(false);
     }
+    const onCloseEdit = () => {
+        setIsEditIncomeClicked(false);
+    }
+    const handleEditIncome = (id) => {
+        const editablePart = incomeDataAll.filter((data)=> data.id === id);
+        setEditableId(id);
+        setIsEditIncomeClicked(true);
+        setSource(editablePart[0]?.source);
+        setEmoji(editablePart[0]?.emoji);
+        setAmount(editablePart[0]?.amount);
+        setDate(editablePart[0]?.date);
+        setEditableObj(editablePart);
+    }
+
+    const handleEdit = async (evt) => {
+        evt.preventDefault();
+        const editIncomeRequestBody = {
+            userName:cleanedUsername,
+            source: source,
+            amount: Number(amount),
+            date: date,
+            emoji: emoji.trim(),
+            id:editableId
+        };
+        try {
+            await axios.post("http://localhost:9090/expensify-income-api/editEntry", editIncomeRequestBody);
+              Swal.fire({
+                title: 'Success!',
+                text: "Income values updated!",
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'my-confirm-button'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    handleResetIncomeValues();
+                    onCloseEdit();
+                    getIncomeDetails();
+                    getIncomeDetailsAllInfo();
+                }
+            });
+        } catch(error) {
+            console.log("Error updating the income", error);
+        }
+    }
+
+
     return (
         <div>
             <div className="bg-white rounded-2xl p-6 shadow-md income-bar-chart">
@@ -157,6 +209,24 @@ function IncomeChildComp(props) {
                     handleIncome={handleIncome}
                     handleResetIncomeValues={handleResetIncomeValues}
                 />
+                <EditSection
+                    isEditClicked={isEditIncomeClicked}
+                    onCloseEdit={onCloseEdit}
+                    title="Edit Income"
+                    source={source}
+                    amount={amount}
+                    date={date}
+                    emoji={emoji}
+                    setSource={setSource}
+                    setAmount={setAmount}
+                    setDate={setDate}
+                    setEmoji={setEmoji}
+                    setShowEmojiPicker={setShowEmojiPicker}
+                    showEmojiPicker={showEmojiPicker}
+                    onEmojiClick={onEmojiClick}
+                    handleEdit={handleEdit}
+                    handleResetIncomeValues={handleResetIncomeValues}
+                />
             </div>
             <div className="income-grid bg-white rounded-2xl p-6 shadow-md">
                 <h2 className="text-left">Income Sources</h2>
@@ -178,6 +248,7 @@ function IncomeChildComp(props) {
                         <div className="bg-green-200 income-expense rounded-md">
                             + Rs:{item.amount}
                         </div>
+                        <img src={Edit} className="h-9 cursor-pointer" onClick={()=>handleEditIncome(item.id)}/>
                         <img src={Delete} className="h-7 cursor-pointer" onClick={()=>deleteEntry("income", item.id, getIncomeDetailsAllInfo,getIncomeDetails)}/>
                         </div>
                     ))

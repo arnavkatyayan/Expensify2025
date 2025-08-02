@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensify.expensify.DTO.IncomeDTO;
+import com.expensify.expensify.Requests.EditIncomeRequest;
 import com.expensify.expensify.Requests.IncomeRequest;
 import com.expensify.expensify.Services.IncomeServices;
 
@@ -76,6 +77,17 @@ public class IncomeController {
 		} catch(Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting the entry");
+		}
+	}
+	
+	@PostMapping("/editEntry")
+	public ResponseEntity<?> editEntryIncome(@RequestBody EditIncomeRequest editIncomeRequest) {
+		try {
+			incomeServices.editEntryService(editIncomeRequest);
+			return ResponseEntity.ok("Entry edited successfully");
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error editing the entry");
 		}
 	}
 	

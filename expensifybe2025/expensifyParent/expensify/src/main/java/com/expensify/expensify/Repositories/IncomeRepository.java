@@ -9,4 +9,5 @@ import com.expensify.expensify.Entities.IncomeEntities;
 public interface IncomeRepository extends JpaRepository<IncomeEntities,Long> {
 		
 	List<IncomeEntities> findAllByUserName(String userName);
+	IncomeEntities findByUserNameAndId(String userName, Long id);
 }

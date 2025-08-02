@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensify.expensify.DTO.ExpenseDTO;
+import com.expensify.expensify.Requests.EditExpenseRequest;
 import com.expensify.expensify.Requests.ExpenseRequest;
 import com.expensify.expensify.Services.ExpenseServices;
 
@@ -63,6 +64,19 @@ public class ExpenseController {
 			return ResponseEntity
 	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
 	                .body("Deleting expense details failed: " + e.getMessage());
+		}
+	}
+	
+	@PostMapping("/editEntry")
+	public ResponseEntity<?> editEntry(@RequestBody EditExpenseRequest editExpenseRequest) {
+		try {
+			expenseServices.editEntryService(editExpenseRequest);
+			return ResponseEntity.ok("Expense edited");
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity
+	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Editing expense details failed: " + e.getMessage());
 		}
 	}
 }

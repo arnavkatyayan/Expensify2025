@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.expensify.expensify.DTO.ExpenseDTO;
 import com.expensify.expensify.Entities.ExpenseEntities;
+import com.expensify.expensify.Entities.IncomeEntities;
 import com.expensify.expensify.Repositories.ExpenseRepository;
+import com.expensify.expensify.Requests.EditExpenseRequest;
 import com.expensify.expensify.Requests.ExpenseRequest;
 
 @Service
@@ -46,6 +48,23 @@ public class ExpenseServicesImpl implements ExpenseServices{
 	@Override
 	public void deleteEntryService(Long id) {
 		expenseRepo.deleteById(id);
+		
+	}
+	@Override
+	public void editEntryService(EditExpenseRequest editExpenseRequest) {
+		ExpenseEntities entity = expenseRepo.findByUserNameAndId(editExpenseRequest.getUserName(),
+				editExpenseRequest.getId());
+		if (entity != null) {
+			// Update fields with new values
+			entity.setDate(editExpenseRequest.getDate());
+			entity.setAmount(editExpenseRequest.getAmount());
+			entity.setSource(editExpenseRequest.getSource());
+			entity.setEmoji(editExpenseRequest.getEmoji());
+
+			// Save updated entity
+			expenseRepo.save(entity);
+		}
+
 		
 	}
 
