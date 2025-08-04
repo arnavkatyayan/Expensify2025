@@ -237,3 +237,6 @@
   width: 90%; 
   display: block; 
 }
+#custom-date {
+  cursor: pointer;
+}

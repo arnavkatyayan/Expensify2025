@@ -1,6 +1,6 @@
 import React from "react";
 import { IncomeBarChart, AddIncome } from "./ResusableMethodsAndModals";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import {useState, useEffect} from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -20,6 +20,9 @@ function IncomeChildComp(props) {
     const [editableObj, setEditableObj] = useState([]);
     const [isEditIncomeClicked, setIsEditIncomeClicked] = useState(false);
     const [editableId, setEditableId] = useState(-1);
+    const [sortableDate, setSortableDate] = useState(false);
+    const [sortableAmount, setSortableAmount] = useState(false);
+
     useEffect(()=> {
         getIncomeDetails(); 
         getIncomeDetailsAllInfo();
@@ -147,6 +150,29 @@ function IncomeChildComp(props) {
         setEditableObj(editablePart);
     }
 
+    const handleSortableAmt = () => {
+        const isSorted = sortableAmount;
+        setSortableAmount(!sortableAmount);
+        const sortableData = [...incomeDataAll].sort((a, b) =>
+            isSorted ? a.amount - b.amount : b.amount - a.amount
+        );
+
+        setIncomeDataAll(sortableData);
+    };
+
+    const handleSortableDate = () => {
+        const isSorted = sortableDate;
+        setSortableDate(!sortableDate);
+
+        const sortableData = [...incomeDataAll].sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return isSorted ? dateA - dateB : dateB - dateA;
+        });
+        
+        setIncomeDataAll(sortableData);
+    };
+
     const handleEdit = async (evt) => {
         evt.preventDefault();
         const editIncomeRequestBody = {
@@ -233,6 +259,24 @@ function IncomeChildComp(props) {
                 <Button className="income-btn-alignment" onClick={() => handleDownload()}>
                     🡇&nbsp;Download
                 </Button>
+                <div className="flex gap-2.5">
+                    <h6 className="opacity-75">Sort by Date ? </h6>
+                    <Form.Check
+                        type="switch"
+                        id="custom-date"
+                        checked={sortableDate}
+                        onChange={handleSortableDate}
+                        disabled={sortableAmount}
+                    />
+                    <h6 className="opacity-75">Sort by Amount?</h6>
+                    <Form.Check
+                        type="switch"
+                        id="custom-date"
+                        checked={sortableAmount}
+                        onChange={handleSortableAmt}
+                        disabled={sortableDate}
+                    />
+                </div>
                 <div className="grid grid-cols-3 gap-3">
                    {
                     incomeDataAll.map((item,index)=> (
