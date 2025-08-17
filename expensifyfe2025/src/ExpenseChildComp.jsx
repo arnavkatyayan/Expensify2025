@@ -196,7 +196,7 @@ function ExpenseChildComp(props) {
                        <div className="flex income-div-alignment gap-6 justify-center items-center hover:rounded-xl hover:bg-gray-100 pt-1.5 cursor-pointer">
 
                         <div className="emoji-section rounded-full bg-gray-300">
-                            {item.emoji}
+                            { item.emoji ? item.emoji: <span className="font-medium">NA</span>}
                         </div>
                         <div className="flex flex-col">
                         <h6>{item.source}</h6>

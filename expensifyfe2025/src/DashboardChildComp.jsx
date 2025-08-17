@@ -57,7 +57,6 @@ function DashboardChildComp(props) {
                 Date: date,
                 Amount: amount
             }));
-            console.log(result);
             getDataLastMonth(result);   
         } catch(error) {
             console.log("error fetching the details",error);
@@ -67,6 +66,7 @@ function DashboardChildComp(props) {
     const getIncomeDetailsAllInfoForTable = async () => {
         try {
             const resp = await axios.get("http://localhost:9090/expensify-income-api/fetchAllIncomeDetails",{params:{userName:props.user}});
+            console.log(resp.data);
             setIncomeListAllData(resp.data);
         } catch(error) {
             console.log("error fetching the details",error);
@@ -85,7 +85,6 @@ function DashboardChildComp(props) {
 
     const filterExpenseData = (arr) => {
       const data = arr.slice(0,5);
-      console.log(data);
       setExpenseList(data);
     }
 
@@ -138,7 +137,7 @@ function DashboardChildComp(props) {
                        <div className="flex income-div-alignment gap-6 justify-center items-center hover:rounded-xl hover:bg-gray-100 pt-1.5 cursor-pointer">
 
                         <div className="emoji-section rounded-full bg-gray-300 !pl-2.5">
-                            {item.emoji}
+                            { item.emoji ? item.emoji: <span className="font-medium">NA</span>}
                         </div>
                         <div className="flex flex-col">
                         <h6 className="source-css" title={item.source}>{item.source}</h6>
@@ -173,7 +172,7 @@ function DashboardChildComp(props) {
                        <div className="flex income-div-alignment gap-6 justify-center items-center hover:rounded-xl hover:bg-gray-100 pt-1.5 p-2.5 cursor-pointer">
 
                         <div className="emoji-section rounded-full bg-gray-300 !pl-2.5">
-                            {item.emoji}
+                        { item.emoji ? item.emoji: <span className="font-medium">NA</span>}
                         </div>
                         <div className="flex flex-col">
                         <h6 className="source-css" title={item.source}>{item.source}</h6>
