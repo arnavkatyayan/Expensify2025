@@ -97,7 +97,7 @@ function DashboardChildComp(props) {
                <img src={TotalBalance} />
                <div className="flex flex-col p-4.5">
                   <p className="font-bold text-gray-800 text-lg tracking-wide mb-2">Total Balance</p>
-                  <h2>Rs: {balance}</h2>
+                  <h2>Rs: {balance < 10000 ? <span className="text-red-700">{balance}</span>:balance}</h2>
                </div>
             </div>
 
@@ -105,7 +105,7 @@ function DashboardChildComp(props) {
                <img src={TotalIncome} />
                <div className="flex flex-col p-4.5">
                   <p className="font-bold text-gray-800 text-lg tracking-wide mb-2">Total Income</p>
-                  <h2>Rs: {incomeAmount}</h2>
+                  <h2>Rs: {incomeAmount >= 100000 ? <span className="text-green-700">{incomeAmount}</span> :incomeAmount }</h2>
                </div>
 
             </div>
@@ -114,7 +114,7 @@ function DashboardChildComp(props) {
                <img src={TotalExpense} />
                <div className="flex flex-col p-4.5">
                   <p className="font-bold text-gray-800 text-lg tracking-wide mb-2">Total Expenses</p>
-                  <h2>Rs: {expenseAmount}</h2>
+                  <h2>Rs: {expenseAmount >= 100000 ? <span className="text-red-700">{expenseAmount}</span> :expenseAmount }</h2>
                </div>
 
             </div>
