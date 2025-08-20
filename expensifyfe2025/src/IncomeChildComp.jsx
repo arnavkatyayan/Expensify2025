@@ -79,7 +79,7 @@ function IncomeChildComp(props) {
 
         try {
             const resp = await axios.post(
-                "http://127.0.0.1:5000/download",
+                "http://127.0.0.1:5000/downloadIncomeData",
                 downloadRequestBody,
                 { responseType: "blob" } // critical for binary download
             );

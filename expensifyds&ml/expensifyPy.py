@@ -9,7 +9,7 @@ CORS(app)
 def home():
     return "Hello from Flask!"
 
-@app.route('/download', methods=['POST'])
+@app.route('/downloadIncomeData', methods=['POST'])
 def download_income():
     data = request.get_json()
     user_name = data.get("userName", "user")
