@@ -152,7 +152,7 @@ function DashboardChildComp(props) {
             </div>
 
             <div className="text-center expense-dashboard-section shadow-2xl p-3.5 rounded-xl">
-               <h4 className="mb-2 font-semibold text-center">Income Overview</h4>
+               <h4 className="mb-2 font-semibold text-center">Income Summary</h4>
                <IncomeBarChart incomeData={incomeList}/>
             </div>
 
