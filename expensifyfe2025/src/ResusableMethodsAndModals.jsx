@@ -445,3 +445,52 @@ export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,set
         </Modal>
     );
 }
+
+export const DownloadSection = ({ show, onClose, title, handleFileName,
+    fileName,
+    isDateChecked,
+    handleDate, resetDownloadData, handleDownload }) => {
+    return (
+        <Modal show={show} onHide={onClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <ul className='list-items'>
+                    <li>1) Enter a custom name for your report (e.g., "Freelance Work" or "Monthly Summary").</li>
+                    <li>2) You can choose to automatically append today’s date to the report name for easier tracking.</li>
+                    <li>3) Once saved, the report will be generated with your chosen name and can be downloaded for your records.</li>
+                </ul>
+
+                <Form>
+                    <Form.Group className="mb-3" controlId="incomeSource">
+                        <Form.Label>File Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="e.g. Freelance Work"
+                            value={fileName}
+                            onChange={handleFileName}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="incomeAmount">
+                        <Form.Check
+                            type="checkbox"
+                            label="Append date to report name"
+                            checked={isDateChecked}
+                            onChange={handleDate}
+                            className='font-medium'
+                        />
+                    </Form.Group>
+                    <div className='flex justify-items-start gap-2.5 income-source'>
+                        <Button variant="primary" type="button" className="w-40" onClick={()=> handleDownload()}>
+                            Download
+                        </Button>
+                        <Button variant="primary" type="button" className="w-40" onClick={()=> resetDownloadData()}>
+                            Reset
+                        </Button>
+                    </div>
+                </Form>
+            </Modal.Body>
+        </Modal>)
+}
