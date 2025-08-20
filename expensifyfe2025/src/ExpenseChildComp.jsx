@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Delete from'/DeleteImage.png';
 import Edit from'/Edit.png';
 import { deleteEntry } from "./ResusableMethodsAndModals";
-import { EditSection } from "./ResusableMethodsAndModals";
+import { EditSection,DownloadSection } from "./ResusableMethodsAndModals";
 function ExpenseChildComp(props) {
     const [isAddExpenseClicked, setIsAddExpenseClicked] = useState(false);
     const [category, setCategory] = useState("");
@@ -19,6 +19,26 @@ function ExpenseChildComp(props) {
     const [expenseDetailsForVisualization, setExpenseDetailsForVisualization] = useState([]);
     const [editableId, setEditableId] = useState(-1);
     const [isEditExpenseClicked, setIsEditExpenseClicked] = useState(false);
+    const [openDownloadWindow, setOpenDownloadWindow] = useState(false);
+    const [fileName, setFileName] = useState("");
+    const [isDateChecked, setIsDateChecked] = useState(false);
+
+    const handleFileName = (evt) => {
+        setFileName(evt.target.value);
+    }
+
+    const handleDate = () => {
+        setIsDateChecked(!isDateChecked);
+    }
+
+    const resetDownloadData = () => {
+        setFileName("");
+        setIsDateChecked(false);
+    }
+
+    const handleDownloadClose = () => {
+        setOpenDownloadWindow(false);
+    }
     const getExpenseDetails = async () => {
         try {
             const resp = await axios.get("http://localhost:9090/expensify-expense-api/getExpenseDetails",{params:{userName:props.user}});
@@ -118,8 +138,57 @@ function ExpenseChildComp(props) {
         setIsEditExpenseClicked(false);
     }
 
-    const handleDownload = () => {
+     const handleDownload = async () => {
+        const filteredExpenseData = expenseDetails.map(item => ({
+            source: item.source,
+            amount: item.amount,
+            date: item.date,
+            userName: item.userName,
+        }));
 
+        const downloadRequestBody = {
+            userName: props.user,
+            expenseData: filteredExpenseData,
+            fileName: fileName,
+            isDateChecked: isDateChecked,
+        };
+
+        try {
+            const resp = await axios.post(
+                "http://127.0.0.1:5000/downloadExpenseData",
+                downloadRequestBody,
+                { responseType: "blob" } // critical for binary download
+            );
+
+            // Create blob
+            const blob = new Blob([resp.data], { type: "text/csv" });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+
+            // ✅ FE-level filename logic
+            let suggestedFileName = fileName?.trim().replace(/\s+/g, "_") || `${props.user}_income_data`;
+
+            if (isDateChecked) {
+                const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+                suggestedFileName = `${suggestedFileName}_${today}.csv`;
+            } else {
+                suggestedFileName = `${suggestedFileName}.csv`;
+            }
+
+            a.href = url;
+            a.download = suggestedFileName;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setOpenDownloadWindow(false);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error handling the download", error);
+        }
+    };
+
+    const handleDownloadModal = () => {
+        setOpenDownloadWindow(true);
     }
 
     const handleClose = () => {
@@ -184,10 +253,21 @@ function ExpenseChildComp(props) {
                     handleResetIncomeValues={handleResetExpenseValues}
                 />
 
+                <DownloadSection
+                    show={openDownloadWindow}
+                    onClose={handleDownloadClose}
+                    title="Download Expense Data"
+                    handleFileName={handleFileName}
+                    fileName={fileName}
+                    isDateChecked={isDateChecked}
+                    handleDate={handleDate}
+                    resetDownloadData={resetDownloadData}
+                    handleDownload={handleDownload}
+                />
             </div>
             <div className="income-grid bg-white rounded-2xl p-6 shadow-md">
                 <h2 className="text-left">Income Sources</h2>
-                <Button className="income-btn-alignment" onClick={()=>handleDownload()}>
+                <Button className="income-btn-alignment" onClick={()=>handleDownloadModal()}>
                     🡇&nbsp;Download
                 </Button>
                 <div className="grid grid-cols-3 gap-3">

@@ -30,6 +30,28 @@ def download_income():
         as_attachment=True,
         download_name=f"{user_name}_income_data.csv"
     )
+    
+@app.route('/downloadExpenseData', methods=['POST'])
+def download_expense():
+    data = request.get_json()
+    user_name = data.get("userName", "user")
+    expense_data = data.get("expenseData", [])
+
+    # Convert to DataFrame
+    df = pd.DataFrame(expense_data)
+    df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')
+    # Save CSV to memory (not disk)
+    output = io.StringIO()
+    df.to_csv(output, index=False)
+    output.seek(0)
+
+    # Send file as response
+    return send_file(
+        io.BytesIO(output.getvalue().encode()),
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name=f"{user_name}_expense_data.csv"
+    )
 
 
 if __name__ == "__main__":
