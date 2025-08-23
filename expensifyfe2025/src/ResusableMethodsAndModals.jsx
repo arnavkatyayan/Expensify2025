@@ -373,7 +373,7 @@ const deleteExpenseEntry = async (id,getExpenseDetails) => {
 export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,setShowEmojiPicker,source,
     amount,
     date,
-    emoji,setSource,setAmount,setDate,setEmoji,handleEdit,onEmojiClick})=> {
+    emoji,setSource,setAmount,setDate,setEmoji,handleEdit,onEmojiClick,handleResetValues})=> {
     return (
         <Modal show={isEditClicked} onHide={onCloseEdit} centered>
             <Modal.Header closeButton>
@@ -436,7 +436,7 @@ export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,set
                         <Button variant="primary" type="submit" className="w-40" onClick={handleEdit}>
                             Edit
                         </Button>
-                        <Button variant="primary" type="submit" className="w-40">
+                        <Button variant="primary" type="submit" className="w-40" onClick={handleResetValues}>
                             Reset
                         </Button>
                     </div>

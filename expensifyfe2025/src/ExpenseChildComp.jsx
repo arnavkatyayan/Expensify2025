@@ -134,6 +134,10 @@ function ExpenseChildComp(props) {
         setDate("");
         setEditableId(-1);
     }
+
+    const handlePrediction = () => {
+
+    }
     const onCloseEdit = () => {
         setIsEditExpenseClicked(false);
     }
@@ -211,7 +215,10 @@ function ExpenseChildComp(props) {
 
                 <h2 className="text-left">Expense Overview</h2>
                 <p className="text-left">Track your spending trends over time and gain insights</p>
-                <Button className="income-btn-alignment" onClick={()=>handleExpenseModal()}>+ Add Expense</Button>
+                <div className="flex gap-2.5">
+                    <Button className="income-btn-alignment predict-btn" onClick={() => handlePrediction()}>+ Predict</Button>
+                    <Button className="income-btn-alignment" onClick={() => handleExpenseModal()}>+ Add Expense</Button>
+                </div>
                 <ExpenseChart
                 expenseData={expenseDetailsForVisualization}
                 />
@@ -237,7 +244,7 @@ function ExpenseChildComp(props) {
                 <EditSection
                     isEditClicked={isEditExpenseClicked}
                     onCloseEdit={onCloseEdit}
-                    title="Edit Income"
+                    title="Edit Expenses"
                     source={category}
                     amount={amount}
                     date={date}
@@ -250,7 +257,7 @@ function ExpenseChildComp(props) {
                     showEmojiPicker={showEmojiPicker}
                     onEmojiClick={onEmojiClick}
                     handleEdit={handleEdit}
-                    handleResetIncomeValues={handleResetExpenseValues}
+                    handleResetValues={handleResetExpenseValues}
                 />
 
                 <DownloadSection

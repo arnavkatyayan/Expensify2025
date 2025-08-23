@@ -291,7 +291,7 @@ function IncomeChildComp(props) {
                     showEmojiPicker={showEmojiPicker}
                     onEmojiClick={onEmojiClick}
                     handleEdit={handleEdit}
-                    handleResetIncomeValues={handleResetIncomeValues}
+                    handleResetValues={handleResetIncomeValues}
                 />
 
                 <DownloadSection
