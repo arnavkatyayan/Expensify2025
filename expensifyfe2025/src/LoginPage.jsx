@@ -113,7 +113,7 @@ function LoginPage(props) {
                             Reset
                         </Button>
                        </div>
-                       <p className="mt-2" onClick={handleSignupMethod}>Dont have an account? <span className="cursor-pointer font-medium hover:underline">SignUp</span></p>
+                       <p className="mt-2" onClick={handleSignupMethod}>Dont have an account? <span className="cursor-pointer font-medium hover:underline login-page-minor-css">SignUp</span></p>
                     </Form>
                 </div>
 
