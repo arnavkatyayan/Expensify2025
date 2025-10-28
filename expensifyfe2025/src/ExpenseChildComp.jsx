@@ -273,7 +273,7 @@ function ExpenseChildComp(props) {
                 />
             </div>
             <div className="income-grid bg-white rounded-2xl p-6 shadow-md">
-                <h2 className="text-left">Income Sources</h2>
+                <h2 className="text-left">Expense Sources</h2>
                 <Button className="income-btn-alignment" onClick={()=>handleDownloadModal()}>
                     🡇&nbsp;Download
                 </Button>
