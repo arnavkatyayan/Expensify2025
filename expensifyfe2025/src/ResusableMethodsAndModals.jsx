@@ -220,6 +220,91 @@ export const AddExpense = ({ show, onClose, title, source,
         </Modal>
     );
 }
+export const RecExpense = ({ show, onClose, title, source,
+    amount,
+    date,
+    emoji,
+    setSource,
+    setAmount,
+    setDate,
+    setEmoji,
+    setShowEmojiPicker,
+    onEmojiClick,
+    showEmojiPicker,
+    handleExpense,
+    handleResetExpenseValues
+}) => {
+    return (
+        <Modal show={show} onHide={onClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group className="mb-3" controlId="incomeSource">
+                        <Form.Label>Expense Source</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="e.g. Rent, Fuel"
+                            value={source}
+                            onChange={(e) => setSource(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="incomeAmount">
+                        <Form.Label>Amount (₹)</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="e.g. 5000"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="incomeDate">
+                        <Form.Label>Date</Form.Label>
+                        <Form.Control
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="incomeEmoji">
+                        <Form.Label>Emoji (optional)</Form.Label>
+                        <div className="d-flex align-items-center gap-2">
+                            <Form.Control
+                                type="text"
+                                value={emoji}
+                                onChange={(e) => setEmoji(e.target.value)}
+                                placeholder="Pick an emoji"
+                                style={{ width: '80%' }}
+                            />
+                            <Button variant="outline-secondary emoji-option" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                                😀
+                            </Button>
+                        </div>
+                        {showEmojiPicker && (
+                            <div className="mt-2">
+                                <EmojiPicker onEmojiClick={onEmojiClick} />
+                            </div>
+                        )}
+                    </Form.Group>
+                    <div className='flex justify-items-start gap-2.5 income-source'>
+                        <Button variant="primary" type="submit" className="w-40" onClick={handleExpense}>
+                            Add Expense
+                        </Button>
+                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetExpenseValues()}>
+                            Reset
+                        </Button>
+                    </div>
+                </Form>
+            </Modal.Body>
+        </Modal>
+    );
+}
 
 export const IncomeBarChart = ({incomeData}) => {
   return (

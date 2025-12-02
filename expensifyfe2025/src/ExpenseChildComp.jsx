@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { ExpenseChart, AddExpense } from "./ResusableMethodsAndModals";
+import { ExpenseChart, AddExpense, RecExpense } from "./ResusableMethodsAndModals";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Delete from'/DeleteImage.png';
 import Edit from'/Edit.png';
 import { deleteEntry } from "./ResusableMethodsAndModals";
-import { EditSection,DownloadSection } from "./ResusableMethodsAndModals";
+import { EditSection, DownloadSection } from "./ResusableMethodsAndModals";
 function ExpenseChildComp(props) {
     const [isAddExpenseClicked, setIsAddExpenseClicked] = useState(false);
     const [category, setCategory] = useState("");
@@ -22,6 +22,12 @@ function ExpenseChildComp(props) {
     const [openDownloadWindow, setOpenDownloadWindow] = useState(false);
     const [fileName, setFileName] = useState("");
     const [isDateChecked, setIsDateChecked] = useState(false);
+    const [isRecurenceClicked, setIsRecurenceClicked] = useState(false);
+    const [categoryRec, setCategoryRec] = useState("");
+    const [amountRec, setAmountRec] = useState("");
+    const [emojiRec, setEmojiRec] = useState("");
+    const [showEmojiPickerRec, setShowEmojiPickerRec] = useState(false);
+    const [dateRec, setDateRec] = useState("");
 
     const handleFileName = (evt) => {
         setFileName(evt.target.value);
@@ -61,7 +67,8 @@ function ExpenseChildComp(props) {
             source: category,
             amount: Number(amount),
             date: date,
-            emoji: emoji.trim()
+            emoji: emoji.trim(),
+            isRecurring:false
         };
         try {
             await axios.post("http://localhost:9090/expensify-expense-api/expenseSaving", expenseRequestBody);
@@ -83,6 +90,47 @@ function ExpenseChildComp(props) {
         } catch (error) {
             console.log("Error adding the expense detail", error);
         }
+    }
+
+    const handleExpenseRec = async (evt) => {
+         evt.preventDefault();
+         console.log("Function called");
+        const expenseRequestBody = {
+            userName: props.user,
+            source: categoryRec,
+            amount: Number(amountRec),
+            date: dateRec,
+            emoji: emojiRec.trim(),
+            isRecurring:true
+        };
+        try {
+            await axios.post("http://localhost:9090/expensify-expense-api/recurringExpenseSaving", expenseRequestBody);
+            Swal.fire({
+                title: 'Success!',
+                text: "Recurring Expense values saved!",
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'my-confirm-button'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    handleResetExpenseValuesRec();
+                    handleCloseRec();
+                    getExpenseDetails();
+                }
+            });
+        } catch (error) {
+            console.log("Error adding the expense detail", error);
+        }
+
+    }
+
+    const handleResetExpenseValuesRec = () => {
+        setCategoryRec("");
+        setAmountRec("");
+        setEmojiRec("");
+        setDateRec("");
     }
 
      const handleEditExpense = (id) => {
@@ -199,14 +247,27 @@ function ExpenseChildComp(props) {
         setIsAddExpenseClicked(false);
     }
 
+    const handleCloseRec = () => {
+        setIsRecurenceClicked(false);
+    }
+
     const handleExpenseModal = () => {
         setIsAddExpenseClicked(true);
+    }
+
+    const handleRecurrenceExpenseModal = () => {
+        setIsRecurenceClicked(true);
     }
 
     const onEmojiClick = (emojiData, event) => {
     setEmoji(emojiData.emoji);
     setShowEmojiPicker(false);
     };
+
+    const onEmojiClickRec = (emojiData) => {
+        setEmojiRec(emojiData.emoji);
+        setShowEmojiPickerRec(false);
+    } 
 
     return (
         
@@ -216,7 +277,8 @@ function ExpenseChildComp(props) {
                 <h2 className="text-left">Expense Overview</h2>
                 <p className="text-left">Track your spending trends over time and gain insights</p>
                 <div className="flex gap-2.5">
-                    <Button className="income-btn-alignment predict-btn" onClick={() => handlePrediction()}>+ Predict</Button>
+                    <Button className="income-btn-alignment predict-btn" onClick={()=>handleRecurrenceExpenseModal()}>+Add Reccuring Expense</Button> 
+                    {/* <Button className="income-btn-alignment predict-btn" onClick={() => handlePrediction()}>+ Predict</Button> */}
                     <Button className="income-btn-alignment" onClick={() => handleExpenseModal()}>+ Add Expense</Button>
                 </div>
                 <ExpenseChart
@@ -239,6 +301,24 @@ function ExpenseChildComp(props) {
                     onEmojiClick={onEmojiClick}
                     handleExpense={handleExpense}
                     handleResetExpenseValues={handleResetExpenseValues}
+                />
+
+                <RecExpense show={isRecurenceClicked}
+                    onClose={handleCloseRec}
+                    title="Add Recurring Expense"
+                    source={categoryRec}
+                    amount={amountRec}
+                    date={dateRec}
+                    emoji={emojiRec}
+                    setSource={setCategoryRec}
+                    setAmount={setAmountRec}
+                    setDate={setDateRec}
+                    setEmoji={setEmojiRec}
+                    setShowEmojiPicker={setShowEmojiPickerRec}
+                    showEmojiPicker={showEmojiPickerRec}
+                    onEmojiClick={onEmojiClickRec}
+                    handleExpense={handleExpenseRec}
+                    handleResetExpenseValues={handleResetExpenseValuesRec}
                 />
 
                 <EditSection
