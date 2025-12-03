@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.expensify.expensify.DTO.ExpenseDTO;
 import com.expensify.expensify.Requests.EditExpenseRequest;
 import com.expensify.expensify.Requests.ExpenseRequest;
+import com.expensify.expensify.Requests.RecurrenceExpenseRequest;
 
 @Service
 public interface ExpenseServices {
@@ -15,4 +16,5 @@ public interface ExpenseServices {
 	List<ExpenseDTO> getExpenseDetailsService(String userName);
 	void deleteEntryService(Long id);
 	void editEntryService(@RequestBody EditExpenseRequest editExpenseRequest);
+	void saveRecurrenceExpenseDetails(@RequestBody RecurrenceExpenseRequest expenseRequest);
 }

@@ -23,6 +23,8 @@ public class ExpenseEntities {
 
     private String date;
     
+    private Boolean isRecurring;
+    
     @Column(name="username")
     private String userName;
 
@@ -73,5 +75,14 @@ public class ExpenseEntities {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public Boolean getIsRecurring() {
+		return isRecurring;
+	}
+
+	public void setIsRecurring(Boolean isRecurring) {
+		this.isRecurring = isRecurring;
+	}
+	
 	
 }

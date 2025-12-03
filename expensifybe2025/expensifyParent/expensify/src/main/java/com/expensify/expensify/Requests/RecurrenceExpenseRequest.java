@@ -1,6 +1,7 @@
 package com.expensify.expensify.Requests;
 
-public class ExpenseRequest {
+public class RecurrenceExpenseRequest {
+
 	private String source;
 	private int amount;
 	private String emoji;
@@ -45,4 +46,5 @@ public class ExpenseRequest {
 		this.isRecurring = isRecurring;
 	}
 	
+
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.expensify.expensify.DTO.ExpenseDTO;
 import com.expensify.expensify.Requests.EditExpenseRequest;
 import com.expensify.expensify.Requests.ExpenseRequest;
+import com.expensify.expensify.Requests.RecurrenceExpenseRequest;
 import com.expensify.expensify.Services.ExpenseServices;
 
 @RestController
@@ -40,6 +41,19 @@ public class ExpenseController {
 	                .body("Adding expense details failed: " + e.getMessage());
 		}
 	}
+	
+	@PostMapping("/recurringExpenseSaving")
+	public ResponseEntity<?> saveRecExpenseDetails(@RequestBody RecurrenceExpenseRequest expenseRequest) {
+		try {
+			expenseServices.saveRecurrenceExpenseDetails(expenseRequest);
+			return ResponseEntity.ok("Recurrence details saved successfully");
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity
+	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Adding recurrence expense details failed: " + e.getMessage());
+		}
+	} 
 	
 	@GetMapping("/getExpenseDetails")
 	public ResponseEntity<List<ExpenseDTO>> getExpenseDetails(@RequestParam String userName) {

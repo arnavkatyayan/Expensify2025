@@ -12,6 +12,7 @@ import com.expensify.expensify.Entities.IncomeEntities;
 import com.expensify.expensify.Repositories.ExpenseRepository;
 import com.expensify.expensify.Requests.EditExpenseRequest;
 import com.expensify.expensify.Requests.ExpenseRequest;
+import com.expensify.expensify.Requests.RecurrenceExpenseRequest;
 
 @Service
 public class ExpenseServicesImpl implements ExpenseServices{
@@ -26,6 +27,7 @@ public class ExpenseServicesImpl implements ExpenseServices{
 		expenseEntity.setSource(expenseRequest.getSource());
 		expenseEntity.setEmoji(expenseRequest.getEmoji());
 		expenseEntity.setUserName(expenseRequest.getUserName());
+		expenseEntity.setIsRecurring(expenseRequest.getIsRecurring());
 		expenseRepo.save(expenseEntity);
 	}
 	@Override
@@ -65,6 +67,18 @@ public class ExpenseServicesImpl implements ExpenseServices{
 			expenseRepo.save(entity);
 		}
 
+		
+	}
+	@Override
+	public void saveRecurrenceExpenseDetails(RecurrenceExpenseRequest expenseRequest) {
+		ExpenseEntities expenseEntity = new ExpenseEntities();
+		expenseEntity.setAmount(expenseRequest.getAmount());
+		expenseEntity.setDate(expenseRequest.getDate());
+		expenseEntity.setSource(expenseRequest.getSource());
+		expenseEntity.setEmoji(expenseRequest.getEmoji());
+		expenseEntity.setUserName(expenseRequest.getUserName());
+		expenseEntity.setIsRecurring(expenseRequest.getIsRecurring());
+		expenseRepo.save(expenseEntity);
 		
 	}
 
