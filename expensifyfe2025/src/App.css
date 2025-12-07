@@ -156,6 +156,18 @@
   color:white!important;
   font-weight: 600 !important;
 }
+.income-btn-alignment-download {
+  background-color: #DDD6FE !important;
+  border: none !important;
+  color:#8B5CF6 !important;
+  font-weight: 600 !important;
+}
+.income-btn-alignment-download:hover {
+  background-color:#8B5CF6!important;
+  border: none !important;
+  color:white!important;
+  font-weight: 600 !important;
+}
 .income-source Button {
   background-color:#8B5CF6!important;
   border: none !important;

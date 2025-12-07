@@ -8,6 +8,7 @@ import Delete from'/DeleteImage.png';
 import Edit from'/Edit.png';
 import { deleteEntry } from "./ResusableMethodsAndModals";
 import { EditSection, DownloadSection } from "./ResusableMethodsAndModals";
+import Select from 'react-select';
 function ExpenseChildComp(props) {
     const [isAddExpenseClicked, setIsAddExpenseClicked] = useState(false);
     const [category, setCategory] = useState("");
@@ -371,10 +372,16 @@ function ExpenseChildComp(props) {
                 />
             </div>
             <div className="income-grid bg-white rounded-2xl p-6 shadow-md">
-                <h2 className="text-left">Expense Sources</h2>
-                <Button className="income-btn-alignment" onClick={()=>handleDownloadModal()}>
-                    🡇&nbsp;Download
-                </Button>
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-left m-0">Expense Sources</h2>
+
+                    <div className="flex items-center gap-3">
+                        <Select placeholder="Select Month" className="w-44" />
+                        <Button onClick={() => handleDownloadModal()} className="income-btn-alignment-download">
+                            🡇&nbsp;Download
+                        </Button>
+                    </div>
+                </div>
                 <div className="grid grid-cols-3 gap-3">
                    {
                     expenseDetails.map((item)=> (
@@ -385,7 +392,9 @@ function ExpenseChildComp(props) {
                         </div>
                         <div className="flex flex-col">
                         <h6>{item.source}</h6>
+                        {!item.isRecurring ? 
                         <h6>{item.date}</h6>
+                           :<h6>(Rec Expense)</h6> }   
                         </div>
                         <div className="bg-red-300 !text-red-600 income-expense rounded-md">
                             - Rs:{item.amount}
