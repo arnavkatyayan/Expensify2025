@@ -43,6 +43,7 @@ public class ExpenseServicesImpl implements ExpenseServices{
 			dto.setSource(entity.getSource());
 			dto.setUserName(entity.getUserName());
 			dto.setId(entity.getId());
+			dto.setIsRecurring(entity.getIsRecurring());
 			list.add(dto);
 		}
 		return list;

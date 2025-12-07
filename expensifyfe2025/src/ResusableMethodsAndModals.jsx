@@ -240,6 +240,12 @@ export const RecExpense = ({ show, onClose, title, source,
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                
+                <ul className="list-items">
+                    <li>1) Add recurring expense here it will be added every month.</li>
+                    <li>2) You can cancel it anytime you would like.</li>
+                </ul>
+
                 <Form>
                     <Form.Group className="mb-3" controlId="incomeSource">
                         <Form.Label>Expense Source</Form.Label>
@@ -263,7 +269,7 @@ export const RecExpense = ({ show, onClose, title, source,
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="incomeDate">
+                    {/* <Form.Group className="mb-3" controlId="incomeDate">
                         <Form.Label>Date</Form.Label>
                         <Form.Control
                             type="date"
@@ -271,7 +277,7 @@ export const RecExpense = ({ show, onClose, title, source,
                             onChange={(e) => setDate(e.target.value)}
                             required
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Form.Group className="mb-3" controlId="incomeEmoji">
                         <Form.Label>Emoji (optional)</Form.Label>
                         <div className="d-flex align-items-center gap-2">
@@ -458,13 +464,21 @@ const deleteExpenseEntry = async (id,getExpenseDetails) => {
 export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,setShowEmojiPicker,source,
     amount,
     date,
-    emoji,setSource,setAmount,setDate,setEmoji,handleEdit,onEmojiClick,handleResetValues})=> {
+    emoji,setSource,setAmount,setDate,setEmoji,handleEdit,onEmojiClick,handleResetValues,isRecurring})=> {
     return (
         <Modal show={isEditClicked} onHide={onCloseEdit} centered>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {isRecurring && (
+
+                    <ul className="list-items">
+                        <li>1) Add recurring expense here it will be added every month.</li>
+                        <li>2) You can cancel it anytime you would like.</li>
+                    </ul>
+
+                )}
                 <Form>
                     <Form.Group className="mb-3" controlId="incomeSource">
                         <Form.Label>Income Source</Form.Label>
@@ -487,16 +501,18 @@ export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,set
                             required
                         />
                     </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="incomeDate">
-                        <Form.Label>Date</Form.Label>
-                        <Form.Control
-                            type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
+                    {!isRecurring && (
+                        <Form.Group className="mb-3" controlId="incomeDate">
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    )}
+                
                     <Form.Group className="mb-3" controlId="incomeEmoji">
                         <Form.Label>Emoji (optional)</Form.Label>
                         <div className="d-flex align-items-center gap-2">

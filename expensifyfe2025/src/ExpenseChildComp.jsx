@@ -28,6 +28,8 @@ function ExpenseChildComp(props) {
     const [emojiRec, setEmojiRec] = useState("");
     const [showEmojiPickerRec, setShowEmojiPickerRec] = useState(false);
     const [dateRec, setDateRec] = useState("");
+    const [recurringEditableIds, setRecurringEditableIds] = useState([]);
+    const [isRecurring, setIsRecurring] = useState(false);
 
     const handleFileName = (evt) => {
         setFileName(evt.target.value);
@@ -45,15 +47,27 @@ function ExpenseChildComp(props) {
     const handleDownloadClose = () => {
         setOpenDownloadWindow(false);
     }
+
     const getExpenseDetails = async () => {
         try {
             const resp = await axios.get("http://localhost:9090/expensify-expense-api/getExpenseDetails",{params:{userName:props.user}});
             setExpenseDetails(resp.data);
+            handleRecurrenceExpenseIDs(resp.data);
             const filteredData = resp.data.map(({date,amount})=>({date,amount}));
            setExpenseDetailsForVisualization(filteredData);
         } catch(error) {
             console.log("error fetching expense details", error);
         }
+    }
+
+    const handleRecurrenceExpenseIDs = (data) => {
+        const entries = data.filter((param)=>param.isRecurring === true);
+        let ids = [];
+        for(let i=0;i<entries.length;i++) {
+            ids.push(entries[i].id);
+        }
+        console.log(ids);
+        setRecurringEditableIds(ids);
     }
 
     useEffect(()=> {
@@ -94,7 +108,6 @@ function ExpenseChildComp(props) {
 
     const handleExpenseRec = async (evt) => {
          evt.preventDefault();
-         console.log("Function called");
         const expenseRequestBody = {
             userName: props.user,
             source: categoryRec,
@@ -136,6 +149,10 @@ function ExpenseChildComp(props) {
      const handleEditExpense = (id) => {
         const editablePart = expenseDetails.filter((data)=> data.id === id);
         setEditableId(id);
+        const isPresent = recurringEditableIds.some((ids)=>ids==id);
+        if(isPresent) {
+            setIsRecurring(true);
+        }
         setIsEditExpenseClicked(true);
         setCategory(editablePart[0]?.source);
         setEmoji(editablePart[0]?.emoji);
@@ -338,6 +355,7 @@ function ExpenseChildComp(props) {
                     onEmojiClick={onEmojiClick}
                     handleEdit={handleEdit}
                     handleResetValues={handleResetExpenseValues}
+                    isRecurring={isRecurring}
                 />
 
                 <DownloadSection

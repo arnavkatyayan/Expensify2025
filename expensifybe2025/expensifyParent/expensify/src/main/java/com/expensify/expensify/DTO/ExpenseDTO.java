@@ -7,18 +7,20 @@ public class ExpenseDTO {
 	    private String date;
 	    private String userName;
 	    private Long Id;
+	    private Boolean isRecurring;
 	    // ✅ Default constructor (required for frameworks like Jackson, JPA, etc.)
 	    public ExpenseDTO() {
 	    }
 
 	    // ✅ Parameterized constructor (handy when creating objects manually)
-	    public ExpenseDTO(String source, int amount, String emoji, String date, String userName,Long Id) {
+	    public ExpenseDTO(String source, int amount, String emoji, String date, String userName,Long Id, Boolean isRecurring) {
 	        this.source = source;
 	        this.amount = amount;
 	        this.emoji = emoji;
 	        this.date = date;
 	        this.userName = userName;
 	        this.Id = Id;
+	        this.isRecurring = isRecurring;
 	    }
 
 	    // ✅ Getters and Setters
@@ -69,6 +71,15 @@ public class ExpenseDTO {
 		public void setId(Long id) {
 			Id = id;
 		}
+
+		public Boolean getIsRecurring() {
+			return isRecurring;
+		}
+
+		public void setIsRecurring(Boolean isRecurring) {
+			this.isRecurring = isRecurring;
+		}
+		
 	    
 	    
 }
