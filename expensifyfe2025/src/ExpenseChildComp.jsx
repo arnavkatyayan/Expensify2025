@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Form,Button } from "react-bootstrap";
 import { ExpenseChart, AddExpense, RecExpense } from "./ResusableMethodsAndModals";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -31,6 +31,7 @@ function ExpenseChildComp(props) {
     const [dateRec, setDateRec] = useState("");
     const [recurringEditableIds, setRecurringEditableIds] = useState([]);
     const [isRecurring, setIsRecurring] = useState(false);
+    const [recurringCheckbox, setRecurringCheckbox] = useState(false);
 
     const handleFileName = (evt) => {
         setFileName(evt.target.value);
@@ -287,6 +288,21 @@ function ExpenseChildComp(props) {
         setShowEmojiPickerRec(false);
     } 
 
+    const handleRecurringCheckbox = () => {
+        setRecurringCheckbox(!recurringCheckbox);
+    }
+
+    useEffect(() => {
+        const dummyData = [...expenseDetails];
+        if (recurringCheckbox) {
+            const filteredData = dummyData.filter((data) => data.isRecurring === true);
+            setExpenseDetails(filteredData);
+        }
+        if (!recurringCheckbox) {
+            getExpenseDetails();
+        }
+    }, [recurringCheckbox]);
+
     return (
         
         <div>
@@ -376,6 +392,11 @@ function ExpenseChildComp(props) {
                     <h2 className="text-left m-0">Expense Sources</h2>
 
                     <div className="flex items-center gap-3">
+                        <Form.Check type="checkbox"
+                        label="Show recurring entries"
+                        checked={recurringCheckbox}
+                        onChange={handleRecurringCheckbox}
+                        />
                         <Select placeholder="Select Month" className="w-44" />
                         <Button onClick={() => handleDownloadModal()} className="income-btn-alignment-download">
                             🡇&nbsp;Download
