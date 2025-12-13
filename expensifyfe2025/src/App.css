@@ -258,3 +258,6 @@
 .login-page-minor-css:hover {
   color: #8B5CF6;
 }
+.form-check-input[type=checkbox] {
+    cursor: pointer;
+}

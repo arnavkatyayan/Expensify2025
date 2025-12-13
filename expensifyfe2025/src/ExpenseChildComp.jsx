@@ -32,7 +32,7 @@ function ExpenseChildComp(props) {
     const [recurringEditableIds, setRecurringEditableIds] = useState([]);
     const [isRecurring, setIsRecurring] = useState(false);
     const [recurringCheckbox, setRecurringCheckbox] = useState(false);
-
+    // const [selectedMonth, setSeclet]
     const handleFileName = (evt) => {
         setFileName(evt.target.value);
     }
@@ -393,9 +393,10 @@ function ExpenseChildComp(props) {
 
                     <div className="flex items-center gap-3">
                         <Form.Check type="checkbox"
-                        label="Show recurring entries"
+                        label="Show only recurring entries"
                         checked={recurringCheckbox}
                         onChange={handleRecurringCheckbox}
+                        className="font-medium"
                         />
                         <Select placeholder="Select Month" className="w-44" />
                         <Button onClick={() => handleDownloadModal()} className="income-btn-alignment-download">
