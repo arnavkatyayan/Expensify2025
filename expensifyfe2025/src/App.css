@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -50,44 +53,53 @@
   top: 0;
   width: 45vw;
 }
+
 .title {
   position: absolute;
-  left:72px;
+  left: 72px;
   cursor: pointer;
 }
+
 .login-section {
   height: 100%;
- 
+
 }
+
 .login-form {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    top: 14vw;
-    left: 40px;
-    height:41vh;
-    width:30vw;
-    padding: 10px;
-    overflow: auto;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 14vw;
+  left: 40px;
+  height: 41vh;
+  width: 30vw;
+  padding: 10px;
+  overflow: auto;
 }
+
 .text-field-css {
-  width:20vw !important;
+  width: 20vw !important;
 }
+
 .button-color {
   background-color: #8B5CF6 !important;
 }
+
 .logo {
   top: 12px;
   left: 4px;
 }
+
 .signup-form {
   height: 53vh;
 }
+
 .my-confirm-button {
   background-color: #8B5CF6 !important;
-  width:12vw;
+  width: 12vw;
 }
+
 .dashboard-section {
   position: absolute;
   top: 117px;
@@ -96,6 +108,7 @@
   height: 150%;
   width: 19vw;
 }
+
 .dashboard-options {
   display: flex;
   flex-direction: column;
@@ -104,6 +117,7 @@
   top: 50px;
   cursor: pointer;
 }
+
 .current-tab-bg-color {
   background-color: #8B5CF6;
   border-radius: 7px;
@@ -111,6 +125,7 @@
   padding-top: 7px;
   color: white;
 }
+
 .dashboardComp-section {
   position: relative;
   top: 11vh;
@@ -119,12 +134,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:2vw;
+  gap: 2vw;
 }
+
 .overview {
   height: 16vh;
   width: 20vw;
 }
+
 .dashboard-options p:hover {
   background-color: #DDD6FE;
   border-radius: 7px;
@@ -132,50 +149,58 @@
   color: white;
   padding-top: 7px;
 }
+
 .income-bar-chart {
   position: absolute;
   left: 22vw;
   width: 61vw;
   top: 7vw;
 }
+
 .income-btn-alignment {
   position: absolute;
   right: 22px;
   top: 37px;
   background-color: #DDD6FE !important;
   border: none !important;
-  color:#8B5CF6 !important;
+  color: #8B5CF6 !important;
   font-weight: 600 !important;
 }
+
 .income-btn-alignment:hover {
   position: absolute;
   right: 22px;
   top: 37px;
-  background-color:#8B5CF6!important;
+  background-color: #8B5CF6 !important;
   border: none !important;
-  color:white!important;
+  color: white !important;
   font-weight: 600 !important;
 }
+
 .income-btn-alignment-download {
   background-color: #DDD6FE !important;
   border: none !important;
-  color:#8B5CF6 !important;
+  color: #8B5CF6 !important;
   font-weight: 600 !important;
 }
+
 .income-btn-alignment-download:hover {
-  background-color:#8B5CF6!important;
+  background-color: #8B5CF6 !important;
   border: none !important;
-  color:white!important;
+  color: white !important;
   font-weight: 600 !important;
 }
+
 .income-source Button {
-  background-color:#8B5CF6!important;
+  background-color: #8B5CF6 !important;
   border: none !important;
 }
+
 .emoji-option:hover {
-  background-color:#8B5CF6!important;
+  background-color: #8B5CF6 !important;
   border: none !important;
 }
+
 .income-grid {
   height: 70vh;
   width: 61vw;
@@ -184,28 +209,33 @@
   left: 22vw;
   overflow: auto;
 }
+
 .emoji-section {
   height: 3vh;
   width: 2vw;
   padding: 2px;
 }
+
 .income-div-alignment {
   position: relative;
   left: 4px;
   top: 25px;
 }
+
 .income-expense {
-  height:3vh;
-  width:4vw;
-  color:green
+  height: 3vh;
+  width: 4vw;
+  color: green
 }
+
 .income-line-chart {
   position: absolute;
   left: 22vw;
   width: 61vw;
   top: 7vw;
-  height:46vh;
+  height: 46vh;
 }
+
 .balance-btn-alignment {
   position: absolute;
   right: -7vw;
@@ -214,7 +244,7 @@
   border: none !important;
   color: #8B5CF6 !important;
   font-weight: 600 !important;
-  width:15vw;
+  width: 15vw;
 }
 
 .balance-btn-alignment:hover {
@@ -226,9 +256,11 @@
   color: white !important;
   font-weight: 600 !important;
 }
+
 .list-items li {
   font-weight: 600;
 }
+
 .pie-chart-css {
   height: 36vh;
   width: 50vw;
@@ -237,27 +269,67 @@
   justify-content: center;
   align-items: center;
 }
+
 .expense-dashboard-section {
   height: 38vh;
   width: 28vw;
   overflow: auto;
 }
+
 .source-css {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 90%; 
-  display: block; 
+  width: 90%;
+  display: block;
 }
+
 #custom-date {
   cursor: pointer;
 }
+
 .predict-btn {
   margin-right: 145px;
 }
+
 .login-page-minor-css:hover {
   color: #8B5CF6;
 }
+
 .form-check-input[type=checkbox] {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.budget-css {
+  height: 1vh;
+  width: 9vw;
+  border: 1px solid black;
+  border-radius: 7px;
+  /* background-color: rgb(129, 178, 129); */
+}
+
+.budget-inner-css {
+  background-color: red;
+  height: 100%;
+  width: 100%;
+}
+
+.budget-btn-alignment {
+  /* position: absolute;
+  right: 22px;
+  top: 37px; */
+  background-color: #DDD6FE !important;
+  border: none !important;
+  color: #8B5CF6 !important;
+  font-weight: 600 !important;
+}
+
+.budget-btn-alignment:hover {
+  /* position: absolute;
+  right: 22px;
+  top: 37px; */
+  background-color: #8B5CF6 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600 !important;
 }

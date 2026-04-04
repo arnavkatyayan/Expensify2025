@@ -1,0 +1,2 @@
+ALTER TABLE expensifyschema.users
+ADD COLUMN budget NUMERIC NOT NULL DEFAULT 0;

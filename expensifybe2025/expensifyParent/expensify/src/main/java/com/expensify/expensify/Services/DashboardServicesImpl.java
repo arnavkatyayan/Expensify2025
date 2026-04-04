@@ -22,23 +22,23 @@ public class DashboardServicesImpl implements DashboardServices {
 
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	ExpenseRepository expenseRepo;
-	
+
 	@Autowired
 	IncomeRepository incomeRepo;
-	
+
 	@Override
 	@Transactional
 	public void saveBalanceDetails(String userName, int balance) {
-	    UserEntity user = userRepo.findByUsername(userName);
-	    if (user != null) {
-	        user.setBalance(balance);
-	        userRepo.save(user); // ✅ Save the updated entity
-	    } else {
-	        throw new RuntimeException("User not found: " + userName);
-	    }
+		UserEntity user = userRepo.findByUsername(userName);
+		if (user != null) {
+			user.setBalance(balance);
+			userRepo.save(user); // ✅ Save the updated entity
+		} else {
+			throw new RuntimeException("User not found: " + userName);
+		}
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class DashboardServicesImpl implements DashboardServices {
 
 	@Override
 	public Map<String, Integer> getDetails(String userName) {
-		Map<String , Integer> m1 = new HashMap<>();
+		Map<String, Integer> m1 = new HashMap<>();
 		int expenseAmt = getExpense(userName);
 		int incomeAmt = getIncome(userName);
 		m1.put("Expense Amount", expenseAmt);
@@ -61,8 +61,8 @@ public class DashboardServicesImpl implements DashboardServices {
 		List<IncomeEntities> l1 = new ArrayList<>();
 		l1 = incomeRepo.findAllByUserName(userName);
 		int incomes = 0;
-		for(IncomeEntities income: l1) {
-			incomes = incomes+income.getAmount();
+		for (IncomeEntities income : l1) {
+			incomes = incomes + income.getAmount();
 		}
 		return incomes;
 	}
@@ -71,12 +71,27 @@ public class DashboardServicesImpl implements DashboardServices {
 		List<ExpenseEntities> l1 = new ArrayList<>();
 		l1 = expenseRepo.findAllByUserName(userName);
 		int expenses = 0;
-		for(ExpenseEntities expense: l1) {
-			expenses = expenses+expense.getAmount();
+		for (ExpenseEntities expense : l1) {
+			expenses = expenses + expense.getAmount();
 		}
 		return expenses;
 	}
 
-	
+	@Override
+	public int getBudget(String userName) {
+		UserEntity user = userRepo.findByUsername(userName);
+		return user.getBudget();
+	}
+
+	@Override
+	public void saveBudgetDetails(String userName, int budget) {
+		UserEntity user = userRepo.findByUsername(userName);
+		if (user != null) {
+			user.setBudget(budget);
+			userRepo.save(user);
+		} else {
+			throw new RuntimeException("User not found: " + userName);
+		}
+	}
 
 }

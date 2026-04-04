@@ -6,47 +6,47 @@ import { PieChart, Pie, Cell, Legend } from 'recharts';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {
-  LineChart,
-  Line,
-  Area,
-  AreaChart
+    LineChart,
+    Line,
+    Area,
+    AreaChart
 } from 'recharts';
 
 
-export const ExpenseChart = ({expenseData})=> {
-  return (
-    <div className="w-full h-72 p-4 bg-white rounded-xl shadow">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={expenseData}>
-          <defs>
-            <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="amount"
-            stroke="#8b5cf6"
-            fillOpacity={1}
-            fill="url(#colorAmount)"
-          />
-          <Line
-            type="monotone"
-            dataKey="amount"
-            stroke="#8b5cf6"
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            activeDot={{ r: 6 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
+export const ExpenseChart = ({ expenseData }) => {
+    return (
+        <div className="w-full h-72 p-4 bg-white rounded-xl shadow">
+            <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={expenseData}>
+                    <defs>
+                        <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8} />
+                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                        </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Area
+                        type="monotone"
+                        dataKey="amount"
+                        stroke="#8b5cf6"
+                        fillOpacity={1}
+                        fill="url(#colorAmount)"
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="amount"
+                        stroke="#8b5cf6"
+                        strokeWidth={2}
+                        dot={{ r: 4 }}
+                        activeDot={{ r: 6 }}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    );
 }
 
 export const AddIncome = ({ show, onClose, title, source,
@@ -125,7 +125,7 @@ export const AddIncome = ({ show, onClose, title, source,
                         <Button variant="primary" type="submit" className="w-40" onClick={handleIncome}>
                             Add Income
                         </Button>
-                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetIncomeValues()}>
+                        <Button variant="primary" type="submit" className="w-40" onClick={() => handleResetIncomeValues()}>
                             Reset
                         </Button>
                     </div>
@@ -211,7 +211,7 @@ export const AddExpense = ({ show, onClose, title, source,
                         <Button variant="primary" type="submit" className="w-40" onClick={handleExpense}>
                             Add Expense
                         </Button>
-                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetExpenseValues()}>
+                        <Button variant="primary" type="submit" className="w-40" onClick={() => handleResetExpenseValues()}>
                             Reset
                         </Button>
                     </div>
@@ -240,7 +240,7 @@ export const RecExpense = ({ show, onClose, title, source,
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                
+
                 <ul className="list-items">
                     <li>1) Add recurring expense here it will be added every month.</li>
                     <li>2) You can cancel it anytime you would like.</li>
@@ -302,7 +302,7 @@ export const RecExpense = ({ show, onClose, title, source,
                         <Button variant="primary" type="submit" className="w-40" onClick={handleExpense}>
                             Add Expense
                         </Button>
-                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetExpenseValues()}>
+                        <Button variant="primary" type="submit" className="w-40" onClick={() => handleResetExpenseValues()}>
                             Reset
                         </Button>
                     </div>
@@ -312,30 +312,30 @@ export const RecExpense = ({ show, onClose, title, source,
     );
 }
 
-export const IncomeBarChart = ({incomeData}) => {
-  return (
-    <div className="w-full h-[300px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={incomeData}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="Date" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="Amount" radius={[5, 5, 0, 0]} fill="#8B5CF6" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
+export const IncomeBarChart = ({ incomeData }) => {
+    return (
+        <div className="w-full h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={incomeData}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="Date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="Amount" radius={[5, 5, 0, 0]} fill="#8B5CF6" />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
+    );
 };
 
 
 const COLORS = ['#F97316', '#EF4444', '#6366F1']; // Orange, Red, Indigo
-export const PieChartData = ({ balance, incomeAmount, expenseAmount}) => {
+export const PieChartData = ({ balance, incomeAmount, expenseAmount }) => {
     const pieChartData = [
-    { name: 'Total Income', value: incomeAmount },
-    { name: 'Total Expenses', value: expenseAmount },
-    { name: 'Total Balance', value: balance },
-];
+        { name: 'Total Income', value: incomeAmount },
+        { name: 'Total Expenses', value: expenseAmount },
+        { name: 'Total Balance', value: balance },
+    ];
     return (
         <PieChart width={400} height={300}>
             <Pie
@@ -357,10 +357,10 @@ export const PieChartData = ({ balance, incomeAmount, expenseAmount}) => {
     )
 };
 
-export const ChangePassword = ({show,title,onClose,currentPassword, newPassword, setCurrentPassword, setNewPassword, handlePasswordChange, handleResetPasswords}) => {
+export const ChangePassword = ({ show, title, onClose, currentPassword, newPassword, setCurrentPassword, setNewPassword, handlePasswordChange, handleResetPasswords }) => {
     return (
         <Modal show={show} onHide={onClose} centered>
-         <Modal.Header closeButton>
+            <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -369,7 +369,7 @@ export const ChangePassword = ({show,title,onClose,currentPassword, newPassword,
                     <li>2) Make sure the new password is different from your current one.</li>
                     <li>3) For your security, use a strong password with a mix of letters, numbers, and symbols.</li>
                 </ul>
-              <Form>
+                <Form>
                     <Form.Group className="mb-3" controlId="incomeSource">
                         <Form.Label>Current password</Form.Label>
                         <Form.Control
@@ -391,33 +391,33 @@ export const ChangePassword = ({show,title,onClose,currentPassword, newPassword,
                             required
                         />
                     </Form.Group>
-                <div className='flex justify-items-start gap-2.5 income-source'>
+                    <div className='flex justify-items-start gap-2.5 income-source'>
                         <Button variant="primary" type="submit" className="w-40" onClick={handlePasswordChange}>
                             Change
                         </Button>
-                        <Button variant="primary" type="submit" className="w-40" onClick={()=> handleResetPasswords()}>
+                        <Button variant="primary" type="submit" className="w-40" onClick={() => handleResetPasswords()}>
                             Reset
                         </Button>
                     </div>
-            
-            
-            </Form> 
+
+
+                </Form>
             </Modal.Body>
-            </Modal>
-      
+        </Modal>
+
     )
 }
 
-export const deleteEntry = async (type,index,getIncomeDetailsAllInfo,getIncomeDetails,getExpenseDetails) => {
-    if(type === "income") {
-        await deleteIncomeEntry(index,getIncomeDetailsAllInfo,getIncomeDetails);
+export const deleteEntry = async (type, index, getIncomeDetailsAllInfo, getIncomeDetails, getExpenseDetails) => {
+    if (type === "income") {
+        await deleteIncomeEntry(index, getIncomeDetailsAllInfo, getIncomeDetails);
     }
     else {
-       await deleteExpenseEntry(index,getIncomeDetailsAllInfo);
+        await deleteExpenseEntry(index, getIncomeDetailsAllInfo);
     }
 }
 
-const deleteIncomeEntry = async (id, getIncomeDetailsAllInfo,getIncomeDetails) => {
+const deleteIncomeEntry = async (id, getIncomeDetailsAllInfo, getIncomeDetails) => {
     try {
         await axios.delete("http://localhost:9090/expensify-income-api/deleteEntry", { params: { id: id } });
         Swal.fire({
@@ -440,7 +440,7 @@ const deleteIncomeEntry = async (id, getIncomeDetailsAllInfo,getIncomeDetails) =
     }
 }
 
-const deleteExpenseEntry = async (id,getExpenseDetails) => {
+const deleteExpenseEntry = async (id, getExpenseDetails) => {
     try {
         await axios.delete("http://localhost:9090/expensify-expense-api/deleteEntry", { params: { id: id } });
         Swal.fire({
@@ -453,7 +453,7 @@ const deleteExpenseEntry = async (id,getExpenseDetails) => {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-               getExpenseDetails();
+                getExpenseDetails();
             }
         })
     }
@@ -461,10 +461,10 @@ const deleteExpenseEntry = async (id,getExpenseDetails) => {
         console.log("Error deleting expense", error);
     }
 }
-export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,setShowEmojiPicker,source,
+export const EditSection = ({ title, isEditClicked, onCloseEdit, showEmojiPicker, setShowEmojiPicker, source,
     amount,
     date,
-    emoji,setSource,setAmount,setDate,setEmoji,handleEdit,onEmojiClick,handleResetValues,isRecurring})=> {
+    emoji, setSource, setAmount, setDate, setEmoji, handleEdit, onEmojiClick, handleResetValues, isRecurring }) => {
     return (
         <Modal show={isEditClicked} onHide={onCloseEdit} centered>
             <Modal.Header closeButton>
@@ -512,7 +512,7 @@ export const EditSection = ({title,isEditClicked,onCloseEdit,showEmojiPicker,set
                             />
                         </Form.Group>
                     )}
-                
+
                     <Form.Group className="mb-3" controlId="incomeEmoji">
                         <Form.Label>Emoji (optional)</Form.Label>
                         <div className="d-flex align-items-center gap-2">
@@ -584,10 +584,45 @@ export const DownloadSection = ({ show, onClose, title, handleFileName,
                         />
                     </Form.Group>
                     <div className='flex justify-items-start gap-2.5 income-source'>
-                        <Button variant="primary" type="button" className="w-40" onClick={()=> handleDownload()}>
+                        <Button variant="primary" type="button" className="w-40" onClick={() => handleDownload()}>
                             Download
                         </Button>
-                        <Button variant="primary" type="button" className="w-40" onClick={()=> resetDownloadData()}>
+                        <Button variant="primary" type="button" className="w-40" onClick={() => resetDownloadData()}>
+                            Reset
+                        </Button>
+                    </div>
+                </Form>
+            </Modal.Body>
+        </Modal>)
+}
+export const SetUserBudget = ({ show, onClose, title, handleBudget, resetBudget, budget, handleBudgetAPI }) => {
+    return (
+        <Modal show={show} onHide={onClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <ul className='list-items'>
+                    <li>Please set your monthly budget</li>
+                    <li>This is different from your total income and expenses</li>
+                    <li>This is the amount you want to save each month</li>
+                </ul>
+
+                <Form>
+                    <Form.Group className="mb-3" controlId="incomeSource">
+                        <Form.Label>Budget</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="e.g. 10000"
+                            value={budget}
+                            onChange={handleBudget}
+                        />
+                    </Form.Group>
+                    <div className='flex justify-items-start gap-2.5 income-source'>
+                        <Button variant="primary" type="button" className="w-40" onClick={() => handleBudgetAPI()}>
+                            Set Budget
+                        </Button>
+                        <Button variant="primary" type="button" className="w-40" onClick={() => resetBudget()}>
                             Reset
                         </Button>
                     </div>

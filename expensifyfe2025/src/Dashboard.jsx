@@ -5,7 +5,7 @@ import { ChangePassword } from "./ResusableMethodsAndModals";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function Dashboard (props) {
+function Dashboard(props) {
     const [currentTab, setCurrentTab] = useState("🧭 Dashboard");
     const [openChangePassWindow, setOpenChangePassWindow] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
@@ -22,14 +22,14 @@ function Dashboard (props) {
     const location = useLocation();
 
     useEffect(() => {
-    if (location.pathname.includes("incomeChildComp")) {
-        setCurrentTab("💰 View Income Sources");
-    } else if (location.pathname.includes("expenseChildComp")) {
-        setCurrentTab("💸 View Expense Sources");
-    } else if (location.pathname.includes("dashboardChildComp")) {
-        setCurrentTab("🧭 Dashboard");
-    }
-}, [location.pathname]);
+        if (location.pathname.includes("incomeChildComp")) {
+            setCurrentTab("💰 View Income Sources");
+        } else if (location.pathname.includes("expenseChildComp")) {
+            setCurrentTab("💸 View Expense Sources");
+        } else if (location.pathname.includes("dashboardChildComp")) {
+            setCurrentTab("🧭 Dashboard");
+        }
+    }, [location.pathname]);
 
     const handleClose = () => {
         setOpenChangePassWindow(false);
@@ -40,14 +40,14 @@ function Dashboard (props) {
         setNewPassword("");
     }
 
-    const checkCurrentPassword = async () =>{
+    const checkCurrentPassword = async () => {
         try {
-            const resp = await axios.get("http://localhost:9090/expensify-login-api/checkCurrentPassword",{params:{password:currentPassword,userName:props.user}});
+            const resp = await axios.get("http://localhost:9090/expensify-login-api/checkCurrentPassword", { params: { password: currentPassword, userName: props.user } });
             return resp.data;
-        } catch(error) {
+        } catch (error) {
             console.log("Error checking current password", error);
         }
-    } 
+    }
 
     const handlePasswordChange = async (event) => {
         event.preventDefault();
@@ -63,7 +63,7 @@ function Dashboard (props) {
             })
             return;
         }
-        if(await checkCurrentPassword() === false) {
+        if (await checkCurrentPassword() === false) {
             Swal.fire({
                 title: 'Error!',
                 text: "Your current password is not matching!",
@@ -78,7 +78,7 @@ function Dashboard (props) {
         const passwordChangeRequestBody = {
             currentPassword: currentPassword,
             newPassword: newPassword,
-            userName:props.user
+            userName: props.user
         };
         try {
             await axios.post("http://localhost:9090/expensify-login-api/changePasswords", passwordChangeRequestBody);
@@ -90,8 +90,8 @@ function Dashboard (props) {
                 customClass: {
                     confirmButton: 'my-confirm-button'
                 }
-            }).then((result)=> {
-                if(result.isConfirmed) {
+            }).then((result) => {
+                if (result.isConfirmed) {
                     handleResetPasswords();
                     handleClose();
                 }
@@ -100,29 +100,29 @@ function Dashboard (props) {
             console.log("Error changing the passwords", error);
         }
     }
-    
+
     const changeTab = (option) => {
         setCurrentTab(option);
-        switch(option) {
+        switch (option) {
             case "🧭 Dashboard":
-            navigate("/dashboard/dashboardChildComp");
-            break;
+                navigate("/dashboard/dashboardChildComp");
+                break;
             case "💰 View Income Sources":
-            navigate("/dashboard/incomeChildComp");
-            break;
+                navigate("/dashboard/incomeChildComp");
+                break;
             case "💸 View Expense Sources":
-            navigate("/dashboard/expenseChildComp");
-            break;
+                navigate("/dashboard/expenseChildComp");
+                break;
             case "🔒 Change Password":
-            setOpenChangePassWindow(true);
-            break;         
+                setOpenChangePassWindow(true);
+                break;
             case "🚪 Logout":
-            navigate("/");
-            sessionStorage.setItem("signedIn", "false");
-            props.setIsSignedIn(false);
-            break;   
+                navigate("/");
+                sessionStorage.setItem("signedIn", "false");
+                props.setIsSignedIn(false);
+                break;
         }
-        
+
     }
 
     return (
@@ -132,23 +132,23 @@ function Dashboard (props) {
                 <div className="dashboard-options">
                     {
                         options.map((option) =>
-                            <p className={`font-bold ${currentTab === option ? "current-tab-bg-color" : ""}`} onClick={()=>changeTab(option)}>
+                            <p className={`font-bold ${currentTab === option ? "current-tab-bg-color" : ""}`} onClick={() => changeTab(option)}>
                                 {option}
                             </p>
                         )
                     }
                 </div>
             </div>
-            <ChangePassword 
-            show={openChangePassWindow}
-            title="Change Password"
-            onClose={handleClose}
-            currentPassword={currentPassword}
-            newPassword={newPassword}
-            setCurrentPassword={setCurrentPassword}
-            setNewPassword={setNewPassword}
-            handlePasswordChange={handlePasswordChange}
-            handleResetPasswords={handleResetPasswords}
+            <ChangePassword
+                show={openChangePassWindow}
+                title="Change Password"
+                onClose={handleClose}
+                currentPassword={currentPassword}
+                newPassword={newPassword}
+                setCurrentPassword={setCurrentPassword}
+                setNewPassword={setNewPassword}
+                handlePasswordChange={handlePasswordChange}
+                handleResetPasswords={handleResetPasswords}
             />
         </div>
     )

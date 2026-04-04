@@ -8,24 +8,27 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="username")
+
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="balance")
+
+	@Column(name = "balance")
 	private int Balance;
+
+	@Column(name = "budget")
+	private int budget;
 
 	public Long getId() {
 		return id;
@@ -66,7 +69,13 @@ public class UserEntity {
 	public void setBalance(int balance) {
 		Balance = balance;
 	}
-	
-	
-	
+
+	public int getBudget() {
+		return budget;
+	}
+
+	public void setBudget(int budget) {
+		this.budget = budget;
+	}
+
 }
